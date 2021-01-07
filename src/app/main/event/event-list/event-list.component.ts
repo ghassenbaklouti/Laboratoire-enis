@@ -3,6 +3,8 @@ import {Subject} from 'rxjs';
 import {Event} from '../../../../models/event.model';
 import {MatDialog} from '@angular/material/dialog';
 import {EventService} from '../../../../services/event.service';
+import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -32,6 +34,22 @@ export class EventListComponent implements OnInit, OnDestroy {
 
   private fetchDataSource(): void {
     this.eventService.getAllEvents().then(data => this.dataSource = data);
+  }
+
+  onRemoveEvent(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      // console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        this.eventService.removeEventById(id).then(() => this.fetchDataSource());
+      }
+    });
   }
 
 

@@ -15,6 +15,7 @@ import { EventListComponent } from './main/event/event-list/event-list.component
 import { EventFormComponent } from './main/event/event-form/event-form.component';
 import { PublicationFormComponent } from './main/publication/publication-form/publication-form.component';
 import { PublicationListComponent } from './main/publication/publication-list/publication-list.component';
+import { ParticipantListComponent } from './main/event/participant-list/participant-list.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PublicationListComponent } from './main/publication/publication-list/pu
     EventFormComponent,
     PublicationFormComponent,
     PublicationListComponent,
+    ParticipantListComponent,
   ],
   imports: [
     BrowserModule,

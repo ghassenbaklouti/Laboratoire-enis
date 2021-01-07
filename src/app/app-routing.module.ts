@@ -9,6 +9,7 @@ import {PublicationListComponent} from "./main/publication/publication-list/publ
 import {PublicationFormComponent} from "./main/publication/publication-form/publication-form.component";
 import {EventListComponent} from "./main/event/event-list/event-list.component";
 import {EventFormComponent} from "./main/event/event-form/event-form.component";
+import {ParticipantListComponent} from "./main/event/participant-list/participant-list.component";
 
 const routes: Routes = [
   {
@@ -110,6 +111,11 @@ const routes: Routes = [
         path: ':id/edit',
         pathMatch: 'full',
         component: EventFormComponent,
+      },
+      {
+        path: ':id/participants',
+        pathMatch: 'full',
+        component: ParticipantListComponent,
       },
       {
         path: '**',
