@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {EventService} from '../../../../services/event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ConfirmDialogComponent} from "../../../../@root/components/confirm-dialog/confirm-dialog.component";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-participant-list',
@@ -59,5 +61,22 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         this.fetchDataSource());
       this.initForm(null); });
 
+  }
+
+  private removeparticipant(memberid: any ): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        // tslint:disable-next-line:max-line-length
+        this.eventService.removeParticipantFromEvent(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource());
+      }
+    });
   }
 }

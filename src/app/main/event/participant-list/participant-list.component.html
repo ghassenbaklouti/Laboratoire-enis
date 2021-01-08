@@ -50,7 +50,7 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-60" *matCellDef="let element">
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="removeparticipant(element.id)">
         <mat-icon>delete</mat-icon>
       </button>
 
