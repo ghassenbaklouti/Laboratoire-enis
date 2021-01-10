@@ -18,6 +18,8 @@ import { PublicationFormComponent } from './main/publication/publication-form/pu
 import { PublicationListComponent } from './main/publication/publication-list/publication-list.component';
 import { ParticipantListComponent } from './main/event/participant-list/participant-list.component';
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
+import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
+import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MemberDetailComponent } from './main/member/member-detail/member-detail
     PublicationListComponent,
     ParticipantListComponent,
     MemberDetailComponent,
+    MemberFormEtudiantComponent,
+    MemberFormEncadrantComponent,
   ],
   imports: [
     BrowserModule,

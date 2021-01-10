@@ -1,0 +1,47 @@
+<div class="container">
+<h2>Create New Teacher</h2>
+
+
+  <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+
+    <mat-form-field>
+      <input matInput placeholder="cin" formControlName="cin">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="First Name" formControlName="First_Name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Last Name" formControlName="Last_Name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Birth Date" type="date" formControlName="Birth_Date">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="cv" formControlName="cv">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Grade" formControlName="Grade">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Etablissement" formControlName="Etablissement">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Picture" formControlName="picture">
+    </mat-form-field>
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
+      &nbsp;
+      <button mat-raised-button color="warn" [routerLink]="'/members'">Back</button>
+    </div>
+
+  </form>
+</div>

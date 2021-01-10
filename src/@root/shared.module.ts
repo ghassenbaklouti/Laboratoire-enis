@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ConfirmDialogModule} from "./components/confirm-dialog/confirm-dialog.module";
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   imports: [
     MaterialModule,
@@ -15,6 +16,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatCardModule,
     MatGridListModule,
+    MatMenuModule,
     ConfirmDialogModule,
   ],
   exports: [
@@ -26,6 +28,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatGridListModule,
     ConfirmDialogModule,
+    MatMenuModule,
   ],
 })
 export class SharedModule {

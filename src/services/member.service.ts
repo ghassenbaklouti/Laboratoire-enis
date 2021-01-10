@@ -3,6 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {GLOBAL} from '../app/app-config';
 import {Utils} from '../utils/utils';
 import {Member} from '../models/memeber.model';
+import {Event} from '../models/event.model';
+import {Etudiant} from '../models/etudiant';
+import {Enseignant} from '../models/enseignant';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +20,10 @@ export class MemberService {
 
   getAllMembers(): Promise<Member[]> {
     return this.httpClient.get<Member[]>('http://localhost:8082/membres').toPromise();
+    // return new Promise(resolve => resolve(this.placeholderMembers));
+  }
+  getAllTeachers(): Promise<Enseignant[]> {
+    return this.httpClient.get<Enseignant[]>('http://localhost:8082/enseignants').toPromise();
     // return new Promise(resolve => resolve(this.placeholderMembers));
   }
 
@@ -43,6 +50,11 @@ export class MemberService {
     this.placeholderMembers = [memberToSave, ...this.placeholderMembers.filter(item => item.id !== member.id)];
 
     return new Promise(resolve => resolve(memberToSave));
+  }
+  createEtudiant(etudiant: any): Promise<Etudiant> {
+    console.log(etudiant);
+    return this.httpClient.post<Etudiant>(`http://localhost:8081/membres/etudiant`, etudiant).toPromise();
+
   }
 
   removeMemberById(id: string): Promise<void> {

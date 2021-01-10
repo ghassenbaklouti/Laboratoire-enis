@@ -1,8 +1,13 @@
 <div class="my-16" fxLayout="row" fxLayoutAlign="end center">
-  <button mat-raised-button color="primary" routerLink="create">
+
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
     <mat-icon class="s-24 mr-4">add</mat-icon>
     Create New
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="createEncadrant">Teacher</button>
+    <button mat-menu-item routerLink="createEtudiant">Student</button>
+  </mat-menu>
 
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
