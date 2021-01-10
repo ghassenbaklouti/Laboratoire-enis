@@ -1,3 +1,7 @@
+import {Publication} from './publication.model';
+import {Tool} from './tool.model';
+import {Event} from './event.model';
+
 export interface Member {
   id: string;
   cin: string;
@@ -8,7 +12,13 @@ export interface Member {
   cv: string;
   email: string;
   password: string;
-  pubs: string;
-  events: string;
-  outils: string;
+  pubs: Publication[];
+  events: Event[];
+  outils: Tool[];
+  encadrant: Member;
+  diplome: string;
+  grade: string;
+  dateInscription: string;
+  etablissement: string;
 }
+

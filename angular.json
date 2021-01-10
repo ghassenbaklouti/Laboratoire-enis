@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "enis21-lab"
+  "defaultProject": "enis21-lab",
+  "cli": {
+    "analytics": "0b5f66a4-3203-494a-b456-eb5052e58857"
+  }
 }

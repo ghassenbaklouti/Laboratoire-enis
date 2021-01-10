@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './main/dashboard/dashboard.component';
@@ -16,6 +17,7 @@ import { EventFormComponent } from './main/event/event-form/event-form.component
 import { PublicationFormComponent } from './main/publication/publication-form/publication-form.component';
 import { PublicationListComponent } from './main/publication/publication-list/publication-list.component';
 import { ParticipantListComponent } from './main/event/participant-list/participant-list.component';
+import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { ParticipantListComponent } from './main/event/participant-list/particip
     PublicationFormComponent,
     PublicationListComponent,
     ParticipantListComponent,
+    MemberDetailComponent,
   ],
   imports: [
     BrowserModule,

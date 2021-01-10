@@ -26,6 +26,9 @@ export class MemberService {
       this.placeholderMembers.filter(item => item.id === id)[0] ?? null
     ));
   }
+  getFullMemberById(idMember: string): Promise<Member> {
+    return this.httpClient.get<Member>(`http://localhost:8082/fullmember/${idMember}`).toPromise();
+  }
 
   /**
    * create a new member or update an old member.

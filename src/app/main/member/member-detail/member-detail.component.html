@@ -1,0 +1,41 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-label class="theme-1">Full Name:</mat-label>{{item.prenom}} {{item.nom}}
+    <br>
+    <mat-label class="theme-1">CIN: </mat-label>{{item.cin}}
+    <br>
+    <mat-label class="theme-1">Birth Date: </mat-label>{{item.date}}
+    <br>
+    <mat-label class="theme-1">Email: </mat-label>{{item.email}}
+    <div *ngIf="item.pubs && item.pubs.length!=0">
+      <mat-label class="theme-1">Publications: </mat-label> <label class="theme-2" *ngFor="let publication of item.pubs">{{publication.title}}</label>
+    </div>
+    <div *ngIf="item.events && item.events.length!=0">
+      <mat-label class="theme-1">Events: </mat-label> <label class="theme-2" *ngFor="let event of item.events">{{event.title}}</label>
+    </div>
+    <div *ngIf="item.outils && item.outils.length!=0">
+      <mat-label class="theme-1">Tools: </mat-label> <label *ngFor="let tool of item.outils">{{tool.source}}</label>
+    </div>
+    <div *ngIf="item.encadrant && item.diplome && item.dateInscription">
+      <mat-label class="theme-1">Encadrant: </mat-label>{{item.encadrant.nom}} {{item.encadrant.prenom}}
+      <br>
+      <mat-label class="theme-1">Diploma: </mat-label>{{item.diplome}}
+      <br>
+      <mat-label class="theme-1">Inscription Date: </mat-label>{{item.dateInscription}}
+      <br>
+    </div>
+    <div *ngIf="item.etablissement && item.grade">
+      <mat-label class="theme-1">Etablissement: </mat-label>{{item.etablissement}}
+      <br>
+      <mat-label class="theme-1">Grade: </mat-label>{{item.grade}}
+      <br>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" [routerLink]="'/members'">Back</button>
+  </mat-card-actions>
+</mat-card>
