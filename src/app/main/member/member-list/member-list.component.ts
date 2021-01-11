@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {EventService} from '../../../../services/event.service';
+import {ToolService} from '../../../../services/tool.service';
 
 @Component({
   selector: 'app-member-list',
@@ -18,9 +20,13 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'cin', 'nom', 'email', 'cv', 'dateNaissance', 'actions'];
   dataSource: Member[] = [];
+  memberToDelete: Member;
+
 
   constructor(
     private memberService: MemberService,
+    private eventService: EventService,
+    private toolService: ToolService,
     private dialog: MatDialog,
   ) { }
 
@@ -46,10 +52,31 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
     dialogRef.componentInstance.confirmButtonColor = 'warn';
 
-    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(async isDeleteConfirmed => {
       console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
-        this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+        this.memberToDelete =   await this.memberService.getFullMemberById(id);
+        if (await this.memberService.getStudentsbyEncadrant(this.memberToDelete) == null){
+              if ( this.memberToDelete.events || this.memberToDelete.outils )
+              {
+
+                for (const item of this.memberToDelete.events){
+                  await this.eventService.removeParticipantFromEvent(id, Number(item.id));
+
+                }
+                for (const item1 of this.memberToDelete.outils){
+                  await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
+
+                }
+               /* for (const item1 of this.memberToDelete.pubs){
+                  await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
+
+                }*/
+                this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+              }
+        } else {
+          console.log('cannot delete teacher !');
+        }
       }
     });
   }

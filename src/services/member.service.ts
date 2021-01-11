@@ -66,4 +66,10 @@ export class MemberService {
     return this.httpClient.delete<void>(`http://localhost:8082/membres/${id}`).toPromise();
   }
 
+  getStudentsbyEncadrant(enseignant: any): Promise<Member[]> {
+    console.log(enseignant);
+    return this.httpClient.post<Member[]>(`http://localhost:8082/students/enseignant`, enseignant).toPromise();
+
+  }
+
 }
