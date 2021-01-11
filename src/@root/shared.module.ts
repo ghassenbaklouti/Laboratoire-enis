@@ -7,6 +7,7 @@ import {ConfirmDialogModule} from "./components/confirm-dialog/confirm-dialog.mo
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   imports: [
     MaterialModule,
@@ -18,6 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatGridListModule,
     MatMenuModule,
     ConfirmDialogModule,
+    MatSortModule
   ],
   exports: [
     MaterialModule,
@@ -29,6 +31,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatGridListModule,
     ConfirmDialogModule,
     MatMenuModule,
+    MatSortModule
   ],
 })
 export class SharedModule {

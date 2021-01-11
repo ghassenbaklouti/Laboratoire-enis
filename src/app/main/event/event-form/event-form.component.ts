@@ -51,6 +51,7 @@ export class EventFormComponent implements OnInit {
     if (!!this.currentItemId) {
       this.eventService.updateEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
     }else {
+      console.log(objectToSubmit);
       this.eventService.createEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
     }
 

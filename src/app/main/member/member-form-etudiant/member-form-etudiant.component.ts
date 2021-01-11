@@ -19,7 +19,7 @@ export class MemberFormEtudiantComponent implements OnInit {
   currentItemId: string;
   item: Member;
   form: FormGroup;
-  etudiantToSave: Etudiant;
+  etudiantToSave: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
@@ -60,24 +60,38 @@ export class MemberFormEtudiantComponent implements OnInit {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
     this.etudiantToSave = {
-      id: null,
       cin: objectToSubmit.cin,
       nom: objectToSubmit.nom,
       prenom: objectToSubmit.prenom,
       date: objectToSubmit.date,
-      photo: objectToSubmit.photo,
+      photo: null,
       cv: objectToSubmit.cv,
       email: objectToSubmit.email,
-      password: null,
-      pubs: null,
-      events: null,
-      outils: null,
-      encadrant: objectToSubmit.encadrant,
-      diplome: objectToSubmit.diplome,
+      password: objectToSubmit.password,
+      pubs: [],
+      events: [],
+      outils: [],
       dateInscription: objectToSubmit.dateInscription,
+      diplome: objectToSubmit.diplome,
+      encadrant: {
+        id: objectToSubmit.encadrant.id,
+        cin: objectToSubmit.encadrant.cin,
+        nom: objectToSubmit.encadrant.nom,
+        prenom: objectToSubmit.encadrant.prenom,
+        date: objectToSubmit.encadrant.date,
+        photo: null,
+        cv: objectToSubmit.encadrant.cv,
+        email: objectToSubmit.encadrant.email,
+        password: objectToSubmit.encadrant.password,
+        pubs: null,
+        events: null,
+        outils: null,
+        grade: objectToSubmit.encadrant.grade,
+        etablissement: objectToSubmit.encadrant.etablissement
+      }
     };
     console.log(this.etudiantToSave);
-    this.memberService.createEtudiant(objectToSubmit).then(() => this.router.navigate(['./members']));
+    this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members']));
 
   }
 

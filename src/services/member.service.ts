@@ -51,16 +51,19 @@ export class MemberService {
 
     return new Promise(resolve => resolve(memberToSave));
   }
-  createEtudiant(etudiant: any): Promise<Etudiant> {
+  createEtudiant(etudiant: any): Promise<Member> {
     console.log(etudiant);
-    return this.httpClient.post<Etudiant>(`http://localhost:8081/membres/etudiant`, etudiant).toPromise();
+    return this.httpClient.post<Member>(`http://localhost:8082/membres/etudiant`, etudiant).toPromise();
+
+  }
+  createEnseignant(enseignant: any): Promise<Member> {
+    console.log(enseignant);
+    return this.httpClient.post<Member>(`http://localhost:8082/membres/enseignant`, enseignant).toPromise();
 
   }
 
   removeMemberById(id: string): Promise<void> {
-    // return this.httpClient.delete<void>('linkToRestApi').toPromise();
-    this.placeholderMembers = this.placeholderMembers.filter(item => item.id !== id);
-    return new Promise(resolve => resolve());
+    return this.httpClient.delete<void>(`http://localhost:8082/membres/${id}`).toPromise();
   }
 
 }

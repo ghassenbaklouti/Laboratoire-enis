@@ -13,6 +13,7 @@ export class MemberFormEncadrantComponent implements OnInit {
   currentItemId: string;
   item: Member;
   form: FormGroup;
+  enseignantToSave: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
@@ -34,14 +35,14 @@ export class MemberFormEncadrantComponent implements OnInit {
     this.form = new FormGroup({
 
       cin: new FormControl(item?.cin, [Validators.required]),
-      First_Name: new FormControl(item?.nom, [Validators.required]),
-      Last_Name: new FormControl(item?.prenom, [Validators.required]),
-      Birth_Date: new FormControl(item?.date, [Validators.required]),
-      Email: new FormControl(item?.email, [Validators.required]),
-      Grade: new FormControl(item?.grade, [Validators.required]),
-      Etablissement: new FormControl(item?.etablissement, [Validators.required]),
+      nom: new FormControl(item?.nom, [Validators.required]),
+      prenom: new FormControl(item?.prenom, [Validators.required]),
+      date: new FormControl(item?.date, [Validators.required]),
+      email: new FormControl(item?.email, [Validators.required]),
+      grade: new FormControl(item?.grade, [Validators.required]),
+      etablissement: new FormControl(item?.etablissement, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
-      picture: new FormControl(item?.photo, [Validators.required]),
+      photo: new FormControl(item?.photo, [Validators.required]),
     });
   }
   isFormInEditMode(): boolean {
@@ -50,7 +51,23 @@ export class MemberFormEncadrantComponent implements OnInit {
   onSubmit(): void {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
-    this.memberService.saveMember(objectToSubmit).then(() => this.router.navigate(['./members']));
+    this.enseignantToSave = {
+        id: objectToSubmit.id,
+        cin: objectToSubmit.cin,
+        nom: objectToSubmit.nom,
+        prenom: objectToSubmit.prenom,
+        date: objectToSubmit.date,
+        photo: null,
+        cv: objectToSubmit.cv,
+        email: objectToSubmit.email,
+        password: objectToSubmit.password,
+        pubs: null,
+        events: null,
+        outils: null,
+        grade: objectToSubmit.grade,
+        etablissement: objectToSubmit.etablissement
+    };
+    this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
 
   }
 
