@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Event} from '../../../../models/event.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../../../services/event.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-event-form',
@@ -17,12 +18,14 @@ export class EventFormComponent implements OnInit {
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
-              private eventService: EventService) { }
+              private eventService: EventService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     if (!!this.currentItemId) {
       this.eventService.getEventById(this.currentItemId).then(item => {
+        item.date = this.datePipe.transform(item.date, 'yyyy-MM-dd');
+        console.log(item.date);
         this.item = item;
         this.initForm(item);
       });

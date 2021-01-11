@@ -1,23 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Event} from '../models/event.model';
-import {Utils} from '../utils/utils';
-import {Member} from "../models/memeber.model";
+import {Member} from '../models/memeber.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  HTTP_OPTIONS = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Access-Control-Allow-Credentials' : 'true',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
-    })
-  };
+
 
   constructor(private httpClient: HttpClient) { }
 
@@ -44,8 +35,6 @@ export class EventService {
 
   removeEventById(id: string): Promise<void> {
      return this.httpClient.delete<void>(`http://localhost:8081/evenements/${id}`).toPromise();
-    // this.placeholderMembers = this.placeholderMembers.filter(item => item.id !== id);
-    // return new Promise(resolve => resolve());
   }
 
   getEventsMembers(id: string): Promise<Member[]> {

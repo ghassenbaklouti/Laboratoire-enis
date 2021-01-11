@@ -28,13 +28,13 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-180" *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
-        <mat-icon>visibility</mat-icon>
+      <button mat-icon-button color="primary" [routerLink]="element.id + '/auteurs'">
+        <mat-icon>emoji_people</mat-icon>
       </button>
       <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" >
+      <button mat-icon-button color="warn" (click)="onRemoveTool(element.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

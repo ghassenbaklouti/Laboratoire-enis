@@ -16,6 +16,8 @@ import { EventFormComponent } from './main/event/event-form/event-form.component
 import { PublicationFormComponent } from './main/publication/publication-form/publication-form.component';
 import { PublicationListComponent } from './main/publication/publication-list/publication-list.component';
 import { ParticipantListComponent } from './main/event/participant-list/participant-list.component';
+import { AuteurListComponent } from './main/tool/auteur-list/auteur-list.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { ParticipantListComponent } from './main/event/participant-list/particip
     PublicationFormComponent,
     PublicationListComponent,
     ParticipantListComponent,
+    AuteurListComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { ParticipantListComponent } from './main/event/participant-list/particip
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

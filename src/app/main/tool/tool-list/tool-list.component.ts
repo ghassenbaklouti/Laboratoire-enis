@@ -3,6 +3,8 @@ import {Subject} from 'rxjs';
 import {Tool} from '../../../../models/tool.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ToolService} from '../../../../services/tool.service';
+import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -33,6 +35,22 @@ export class ToolListComponent implements OnInit, OnDestroy  {
 
   private fetchDataSource(): void {
     this.toolService.getAllTools().then(data => this.dataSource = data);
+  }
+
+  onRemoveTool(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      // console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        this.toolService.removeToolById(id).then(() => this.fetchDataSource());
+      }
+    });
   }
 
 }
