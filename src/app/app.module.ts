@@ -17,14 +17,12 @@ import { EventFormComponent } from './main/event/event-form/event-form.component
 import { PublicationFormComponent } from './main/publication/publication-form/publication-form.component';
 import { PublicationListComponent } from './main/publication/publication-list/publication-list.component';
 import { ParticipantListComponent } from './main/event/participant-list/participant-list.component';
-<<<<<<< HEAD
 import { AuteurListComponent } from './main/tool/auteur-list/auteur-list.component';
-import {DatePipe} from "@angular/common";
-=======
+import {DatePipe} from '@angular/common';
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
->>>>>>> c2383a6d00611a2e8d60d6d450cef2420431ee53
+
 
 @NgModule({
   declarations: [
@@ -40,13 +38,10 @@ import { MemberFormEncadrantComponent } from './main/member/member-form-encadran
     PublicationFormComponent,
     PublicationListComponent,
     ParticipantListComponent,
-<<<<<<< HEAD
     AuteurListComponent,
-=======
     MemberDetailComponent,
     MemberFormEtudiantComponent,
     MemberFormEncadrantComponent,
->>>>>>> c2383a6d00611a2e8d60d6d450cef2420431ee53
   ],
   imports: [
     BrowserModule,
