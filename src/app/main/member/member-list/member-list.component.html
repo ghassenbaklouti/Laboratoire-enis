@@ -1,8 +1,13 @@
 <div class="my-16" fxLayout="row" fxLayoutAlign="end center">
-  <button mat-raised-button color="primary" routerLink="create">
+
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
     <mat-icon class="s-24 mr-4">add</mat-icon>
     Create New
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="createEncadrant">Teacher</button>
+    <button mat-menu-item routerLink="createEtudiant">Student</button>
+  </mat-menu>
 
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
@@ -46,7 +51,7 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-180" *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
+      <button mat-icon-button color="primary" [routerLink]="element.id + '/detail'">
         <mat-icon>visibility</mat-icon>
       </button>
       <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">

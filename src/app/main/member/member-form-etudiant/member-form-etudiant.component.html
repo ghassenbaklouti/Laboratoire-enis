@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Create New Student</h2>
+      <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+          <mat-form-field>
+            <input matInput placeholder="cin" formControlName="cin">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="First Name" formControlName="nom">
+          </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="prenom">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Birth Date" type="date" formControlName="date">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="cv" formControlName="cv">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Diploma" formControlName="diplome">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Inscription Date" type="date" formControlName="dateInscription">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Picture" formControlName="photo">
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Encadrant</mat-label>
+          <mat-select formControlName="encadrant">
+            <mat-option  *ngFor="let encadrant of encadrants" [value]="encadrant" >{{encadrant.prenom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
+          &nbsp;
+          <button mat-raised-button color="warn" [routerLink]="'/members'">Back</button>
+        </div>
+      </form>
+</div>

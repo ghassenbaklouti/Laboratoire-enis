@@ -10,7 +10,13 @@ import {PublicationFormComponent} from "./main/publication/publication-form/publ
 import {EventListComponent} from "./main/event/event-list/event-list.component";
 import {EventFormComponent} from "./main/event/event-form/event-form.component";
 import {ParticipantListComponent} from "./main/event/participant-list/participant-list.component";
+<<<<<<< HEAD
 import {AuteurListComponent} from "./main/tool/auteur-list/auteur-list.component";
+=======
+import {MemberDetailComponent} from './main/member/member-detail/member-detail.component';
+import {MemberFormEncadrantComponent} from './main/member/member-form-encadrant/member-form-encadrant.component';
+import {MemberFormEtudiantComponent} from './main/member/member-form-etudiant/member-form-etudiant.component';
+>>>>>>> c2383a6d00611a2e8d60d6d450cef2420431ee53
 
 const routes: Routes = [
   {
@@ -32,14 +38,29 @@ const routes: Routes = [
         component: MemberListComponent,
       },
       {
-        path: 'create',
+        path: 'createEncadrant',
         pathMatch: 'full',
-        component: MemberFormComponent,
+        component: MemberFormEncadrantComponent,
       },
       {
-        path: ':id/edit',
+        path: 'createEtudiant',
         pathMatch: 'full',
-        component: MemberFormComponent,
+        component: MemberFormEtudiantComponent,
+      },
+      {
+        path: ':id/editEncadrant',
+        pathMatch: 'full',
+        component: MemberFormEncadrantComponent,
+      },
+      {
+        path: ':id/editEtudiant',
+        pathMatch: 'full',
+        component: MemberFormEtudiantComponent,
+      },
+      {
+        path: ':id/detail',
+        pathMatch: 'full',
+        component: MemberDetailComponent,
       },
       {
         path: '**',

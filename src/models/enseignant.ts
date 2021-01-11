@@ -1,8 +1,8 @@
 import {Publication} from './publication.model';
-import {Tool} from './tool.model';
 import {Event} from './event.model';
+import {Tool} from './tool.model';
 
-export interface Member {
+export class Enseignant {
   id: string;
   cin: string;
   nom: string;
@@ -12,13 +12,6 @@ export interface Member {
   cv: string;
   email: string;
   password: string;
-  pubs: Publication[];
-  events: Event[];
-  outils: Tool[];
-  encadrant: Member;
-  diplome: string;
   grade: string;
-  dateInscription: string;
   etablissement: string;
 }
-

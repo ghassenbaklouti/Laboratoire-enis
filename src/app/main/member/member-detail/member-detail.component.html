@@ -1,0 +1,93 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title></mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <table>
+      <tr>
+        <th  class="theme-1">Full Name:</th>
+        <td>{{item.prenom}} {{item.nom}}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th  class="theme-1">CIN:</th>
+        <td>{{item.cin}}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th  class="theme-1">Birth Date:</th>
+        <td>{{item.date}}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th  class="theme-1">Email:</th>
+        <td>{{item.email}}</td>
+      </tr>
+    </table>
+    <div *ngIf="item.pubs && item.pubs.length!=0">
+      <table>
+        <tr>
+          <th  class="theme-1">Publications:</th>
+          <td   *ngFor="let publication of item.pubs">{{publication.title}}&emsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="item.events && item.events.length!=0">
+      <table>
+        <tr>
+          <th  class="theme-1">Events:</th>
+          <td  *ngFor="let event of item.events">{{event.title}}&emsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="item.outils && item.outils.length!=0">
+      <table>
+        <tr>
+          <th  class="theme-1">Tools:</th>
+          <td  *ngFor="let tool of item.outils">{{tool.source}}&emsp;</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="item.encadrant && item.diplome && item.dateInscription">
+      <table>
+        <tr>
+          <th  class="theme-1">Encadrant:</th>
+          <td >{{item.encadrant.nom}} {{item.encadrant.prenom}}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th  class="theme-1">Diploma:</th>
+          <td >{{item.diplome}}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th  class="theme-1">Inscription Date:</th>
+          <td >{{item.dateInscription}}</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="item.etablissement && item.grade">
+      <table>
+        <tr>
+          <th  class="theme-1">Etablissement:</th>
+          <td >{{item.etablissement}}</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th  class="theme-1">Grade:</th>
+          <td >{{item.grade}}</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" [routerLink]="'/members'">Back</button>
+  </mat-card-actions>
+</mat-card>
