@@ -21,6 +21,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'cin', 'nom', 'email', 'cv', 'dateNaissance', 'actions'];
   dataSource: Member[] = [];
   memberToDelete: Member;
+  students: Member[];
 
 
   constructor(
@@ -56,27 +57,31 @@ export class MemberListComponent implements OnInit, OnDestroy {
       console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
         this.memberToDelete =   await this.memberService.getFullMemberById(id);
-        if (await this.memberService.getStudentsbyEncadrant(this.memberToDelete) == null){
-              if ( this.memberToDelete.events || this.memberToDelete.outils )
-              {
+        this.memberService.getStudentsbyEncadrant(this.memberToDelete).then(async data => {
+          this.students = data;
+          console.log(data.length);
+          if (data.length === 0) {
+            if ( this.memberToDelete.events || this.memberToDelete.outils )
+            {
 
-                for (const item of this.memberToDelete.events){
-                  await this.eventService.removeParticipantFromEvent(id, Number(item.id));
+              for (const item of this.memberToDelete.events){
+                await this.eventService.removeParticipantFromEvent(id, Number(item.id));
 
-                }
-                for (const item1 of this.memberToDelete.outils){
-                  await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
-
-                }
-               /* for (const item1 of this.memberToDelete.pubs){
-                  await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
-
-                }*/
-                this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
               }
-        } else {
-          console.log('cannot delete teacher !');
-        }
+              for (const item1 of this.memberToDelete.outils){
+                await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
+
+              }
+              /* for (const item1 of this.memberToDelete.pubs){
+                 await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
+
+              }*/
+              this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+            }
+          }else {
+            console.log('cannot delete teacher !');
+          }
+        });
       }
     });
   }

@@ -68,6 +68,7 @@ export class MemberService {
 
   getStudentsbyEncadrant(enseignant: any): Promise<Member[]> {
     console.log(enseignant);
+    // @ts-ignore
     return this.httpClient.post<Member[]>(`http://localhost:8082/students/enseignant`, enseignant).toPromise();
 
   }
