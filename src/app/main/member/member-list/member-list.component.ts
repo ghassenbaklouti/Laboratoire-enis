@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {EventService} from '../../../../services/event.service';
 import {ToolService} from '../../../../services/tool.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-member-list',
@@ -25,6 +26,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private router: Router,
     private memberService: MemberService,
     private eventService: EventService,
     private toolService: ToolService,
@@ -43,6 +45,19 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
   private fetchDataSource(): void {
     this.memberService.getAllMembers().then(data => this.dataSource = data);
+  }
+  redirectToEdit(element: any): void {
+    console.log(element.id);
+    if (element.grade != null){
+      console.log('Encadrant');
+      console.log(element.id);
+      this.router.navigate([`./members/editEncadrant/${Number(element.id)}`]);
+    }
+    if (element.diplome != null){
+      console.log('Etudiant');
+      this.router.navigate([`./members/editEtudiant/${Number(element.id)}`]);
+    }
+
   }
 
   onRemoveAccount(id: any): void {

@@ -21,10 +21,12 @@ export class MemberFormEncadrantComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
+    console.log(this.currentItemId);
     if (!!this.currentItemId) {
       this.memberService.getMemberById(this.currentItemId).then(item => {
         this.item = item;
         this.initForm(item);
+        console.log(item);
       });
     } else {
       this.initForm(null);
@@ -67,8 +69,13 @@ export class MemberFormEncadrantComponent implements OnInit {
         grade: objectToSubmit.grade,
         etablissement: objectToSubmit.etablissement
     };
-    this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
 
+
+    if (!!this.currentItemId) {
+      this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members']));
+    }else {
+      this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
+    }
   }
 
 }

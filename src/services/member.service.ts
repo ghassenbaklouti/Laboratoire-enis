@@ -28,10 +28,8 @@ export class MemberService {
   }
 
   getMemberById(id: string): Promise<Member> {
-    // return this.httpClient.get<Member>('linkToRestApi').toPromise();
-    return new Promise(resolve => resolve(
-      this.placeholderMembers.filter(item => item.id === id)[0] ?? null
-    ));
+    return this.httpClient.get<Member>(`http://localhost:8082//membre/${id}`).toPromise();
+
   }
   getFullMemberById(idMember: string): Promise<Member> {
     return this.httpClient.get<Member>(`http://localhost:8082/fullmember/${idMember}`).toPromise();
@@ -71,6 +69,12 @@ export class MemberService {
     // @ts-ignore
     return this.httpClient.post<Member[]>(`http://localhost:8082/students/enseignant`, enseignant).toPromise();
 
+  }
+  updateEtudiant(id: string, etudiant: Member): Promise<Member>{
+    return this.httpClient.put<Member>(`http://localhost:8082/membres/etudiant/${id}`, etudiant).toPromise();
+  }
+  updateTeacher(id: string, enseignant: Member): Promise<Member>{
+    return this.httpClient.put<Member>(`http://localhost:8082/membres/enseignant/${id}`, enseignant).toPromise();
   }
 
 }

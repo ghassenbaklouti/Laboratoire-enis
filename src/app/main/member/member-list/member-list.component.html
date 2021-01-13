@@ -54,7 +54,7 @@
       <button mat-icon-button color="primary" [routerLink]="element.id + '/detail'">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
+      <button mat-icon-button color="primary" (click)="redirectToEdit(element)" >
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)">

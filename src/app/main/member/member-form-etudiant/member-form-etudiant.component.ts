@@ -19,6 +19,7 @@ export class MemberFormEtudiantComponent implements OnInit {
   currentItemId: string;
   item: Member;
   form: FormGroup;
+  selectedEncadrant: Enseignant;
   etudiantToSave: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -29,13 +30,16 @@ export class MemberFormEtudiantComponent implements OnInit {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     if (!!this.currentItemId) {
       this.memberService.getMemberById(this.currentItemId).then(item => {
+        this.memberService.getAllTeachers().then(data => {this.encadrants = data;
+          // tslint:disable-next-line:max-line-length
+                                                          this.selectedEncadrant = data.find(encadrant => this.item.encadrant.id === encadrant.id); });
         this.item = item;
         this.initForm(item);
       });
     } else {
       this.initForm(null);
     }
-    this.memberService.getAllTeachers().then(data => this.encadrants = data);
+
   }
   // tslint:disable-next-line:typedef
   initForm(item: Member) {
@@ -90,9 +94,13 @@ export class MemberFormEtudiantComponent implements OnInit {
         etablissement: objectToSubmit.encadrant.etablissement
       }
     };
-    console.log(this.etudiantToSave);
-    this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members']));
 
+    if (!!this.currentItemId) {
+      this.memberService.updateEtudiant(this.currentItemId,this.etudiantToSave).then(() => this.router.navigate(['./members']));
+    }else {
+      console.log(this.etudiantToSave);
+      this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members']));
+    }
   }
 
 }

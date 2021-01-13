@@ -1,6 +1,5 @@
 <div class="container">
-<h2>Create New Teacher</h2>
-
+  <h2>{{isFormInEditMode() ? 'Edit Teacher' : 'Create New Teacher'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
 

@@ -46,12 +46,12 @@ const routes: Routes = [
         component: MemberFormEtudiantComponent,
       },
       {
-        path: ':id/editEncadrant',
+        path: 'editEncadrant/:id',
         pathMatch: 'full',
         component: MemberFormEncadrantComponent,
       },
       {
-        path: ':id/editEtudiant',
+        path: 'editEtudiant/:id',
         pathMatch: 'full',
         component: MemberFormEtudiantComponent,
       },

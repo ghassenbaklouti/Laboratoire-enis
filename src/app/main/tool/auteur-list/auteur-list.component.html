@@ -1,7 +1,7 @@
 <div class="my-16" fxLayout="row" fxLayoutAlign="end center">
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()"  class="form" fxLayout="column">
     <mat-form-field>
-      <input matInput placeholder="cin" type="number" formControlName="cin" [(ngModel)]="cin">
+      <input matInput placeholder="cin" type="text" formControlName="cin" [(ngModel)]="cin">
     </mat-form-field>
     <div class="form-element">
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid"><mat-icon class="s-24 mr-4">add</mat-icon>Add Author</button>
