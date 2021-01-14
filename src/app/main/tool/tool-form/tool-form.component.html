@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h4>{{isFormInEditMode() ? 'Edit Tool' : 'Create New Tool'}}</h4>
+  <h2>{{isFormInEditMode() ? 'Edit Tool' : 'Create New Tool'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
 
@@ -16,6 +16,8 @@
 
     <div class="form-element">
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
+      &nbsp;
+      <button mat-raised-button color="warn" [routerLink]="'/tools'">Back</button>
     </div>
 
   </form>

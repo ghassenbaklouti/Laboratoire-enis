@@ -4,5 +4,5 @@ export interface Publication {
   title: string;
   lien: string;
   date: string;
-  source: string;
+  sourcePdf: string;
 }

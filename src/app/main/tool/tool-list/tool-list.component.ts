@@ -48,6 +48,7 @@ export class ToolListComponent implements OnInit, OnDestroy  {
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       // console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
+        this.toolService.removeToolParticipants(id).then();
         this.toolService.removeToolById(id).then(() => this.fetchDataSource());
       }
     });

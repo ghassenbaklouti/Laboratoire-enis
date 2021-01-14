@@ -55,4 +55,9 @@ export class EventService {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.post<void>(`http://localhost:8082/membres/event/removeParticipant`, {evenement_id : idevent, organisateur_id: idparticipant}).toPromise();
   }
+  removeEventParticipants(idevent: number): Promise<void>{
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.delete<void>(`http://localhost:8082/member/event/delete/${idevent}`).toPromise();
+  }
+
 }

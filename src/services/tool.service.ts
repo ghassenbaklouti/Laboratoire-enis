@@ -51,4 +51,8 @@ export class ToolService {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.post<void>(`http://localhost:8082/membres/outil/removeAuteur`, {outil_id : idoutil, utilisateur_id: idauteur}).toPromise();
   }
+  removeToolParticipants(idOutil: number): Promise<void>{
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.delete<void>(`http://localhost:8082//member/outil/delete/${idOutil}`).toPromise();
+  }
 }

@@ -47,6 +47,7 @@ export class EventListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       // console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
+        this.eventService.removeEventParticipants(id).then();
         this.eventService.removeEventById(id).then(() => this.fetchDataSource());
       }
     });

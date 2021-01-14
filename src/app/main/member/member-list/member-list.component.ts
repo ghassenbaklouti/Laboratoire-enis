@@ -8,6 +8,7 @@ import {takeUntil} from 'rxjs/operators';
 import {EventService} from '../../../../services/event.service';
 import {ToolService} from '../../../../services/tool.service';
 import {Router} from '@angular/router';
+import {PublicationService} from '../../../../services/publication.service';
 
 @Component({
   selector: 'app-member-list',
@@ -30,6 +31,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
     private memberService: MemberService,
     private eventService: EventService,
     private toolService: ToolService,
+    private publicationService: PublicationService,
     private dialog: MatDialog,
   ) { }
 
@@ -76,7 +78,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
           this.students = data;
           console.log(data.length);
           if (data.length === 0) {
-            if ( this.memberToDelete.events || this.memberToDelete.outils )
+            if ( this.memberToDelete.events || this.memberToDelete.outils || this.memberToDelete.pubs)
             {
 
               for (const item of this.memberToDelete.events){
@@ -87,10 +89,10 @@ export class MemberListComponent implements OnInit, OnDestroy {
                 await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
 
               }
-              /* for (const item1 of this.memberToDelete.pubs){
-                 await this.toolService.removeAuteurFromTool(Number(id), Number(item1.id));
+              for (const item1 of this.memberToDelete.pubs){
+                 await this.publicationService.removeAuteurFromPublication(Number(id), Number(item1.id));
 
-              }*/
+              }
               this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
             }
           }else {

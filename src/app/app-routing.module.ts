@@ -14,6 +14,7 @@ import {AuteurListComponent} from './main/tool/auteur-list/auteur-list.component
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
 import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
+import {AuteurPublicationListComponent} from './main/publication/auteur-publication-list/auteur-publication-list.component';
 
 
 const routes: Routes = [
@@ -101,6 +102,11 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         component: PublicationListComponent,
+      },
+      {
+        path: ':id/participants',
+        pathMatch: 'full',
+        component: AuteurPublicationListComponent,
       },
       {
         path: 'create',

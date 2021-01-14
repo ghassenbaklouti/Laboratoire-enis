@@ -1,5 +1,5 @@
 <div class="my-16" fxLayout="row" fxLayoutAlign="end center">
-  <button mat-raised-button color="primary" >
+  <button mat-raised-button color="primary" routerLink="create">
     <mat-icon class="s-24 mr-4">add</mat-icon>
     Create New
   </button>
@@ -26,11 +26,16 @@
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.date | date :'d MMMM y'}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="lien">
+    <th mat-header-cell class="px-12" *matHeaderCellDef>Lien</th>
+    <td mat-cell class="px-12" *matCellDef="let element"> {{element.lien}} </td>
+  </ng-container>
+
   <!-- Symbol Column -->
   <ng-container matColumnDef="source">
     <th mat-header-cell class="px-12" *matHeaderCellDef>Source</th>
     <td mat-cell class="px-12" *matCellDef="let element">
-      <a [href]="element.source" target="_blank">
+      <a [href]="element.sourcePdf" target="_blank">
         <mat-icon>source</mat-icon>
       </a>
     </td>
@@ -38,13 +43,13 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-180" *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
-        <mat-icon>visibility</mat-icon>
+      <button mat-icon-button color="primary" [routerLink]="element.id + '/participants'">
+        <mat-icon>emoji_people</mat-icon>
       </button>
       <button mat-icon-button color="primary" [routerLink]="element.id + '/edit'">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" >
+      <button mat-icon-button color="warn" (click)="onRemovePublication(element.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

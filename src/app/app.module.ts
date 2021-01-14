@@ -22,6 +22,7 @@ import {DatePipe} from '@angular/common';
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
+import { AuteurPublicationListComponent } from './main/publication/auteur-publication-list/auteur-publication-list.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MemberFormEncadrantComponent } from './main/member/member-form-encadran
     MemberDetailComponent,
     MemberFormEtudiantComponent,
     MemberFormEncadrantComponent,
+    AuteurPublicationListComponent,
   ],
   imports: [
     BrowserModule,

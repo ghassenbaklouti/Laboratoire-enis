@@ -3,6 +3,8 @@ import {Subject} from 'rxjs';
 import {Publication} from '../../../../models/publication.model';
 import {MatDialog} from '@angular/material/dialog';
 import {PublicationService} from '../../../../services/publication.service';
+import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-publication-list',
@@ -15,7 +17,7 @@ export class PublicationListComponent implements OnInit, OnDestroy {
     // tslint:disable-next-line:variable-name
   protected _onDestroy = new Subject<void>();
 
-  displayedColumns: string[] = ['id', 'title', 'date', 'type', 'source', 'actions'];
+  displayedColumns: string[] = ['id', 'title', 'date', 'type', 'lien', 'source', 'actions'];
   dataSource: Publication[] = [];
 
   constructor(private publicationService: PublicationService,
@@ -30,6 +32,23 @@ export class PublicationListComponent implements OnInit, OnDestroy {
   }
   private fetchDataSource(): void {
     this.publicationService.getAllPublications().then(data => this.dataSource = data);
+  }
+
+  onRemovePublication(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      // console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        this.publicationService.removePublicationParticipants(id).then();
+        this.publicationService.removePublicationById(id).then(() => this.fetchDataSource());
+      }
+    });
   }
 
 }
