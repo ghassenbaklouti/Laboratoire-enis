@@ -3,7 +3,7 @@ import {Tool} from '../../../../models/tool.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToolService} from '../../../../services/tool.service';
-import {Event} from '../../../../models/event.model';
+import {Evenement} from '../../../../models/evenement.model';
 import {PublicationService} from '../../../../services/publication.service';
 import {Publication} from '../../../../models/publication.model';
 

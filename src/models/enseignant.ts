@@ -1,5 +1,5 @@
 import {Publication} from './publication.model';
-import {Event} from './event.model';
+import {Evenement} from './evenement.model';
 import {Tool} from './tool.model';
 
 export class Enseignant {
@@ -8,7 +8,7 @@ export class Enseignant {
   nom: string;
   prenom: string;
   date: string;
-  photo: string;
+  photo: any;
   cv: string;
   email: string;
   password: string;

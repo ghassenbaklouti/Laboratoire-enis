@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MemberService} from '../../../../services/member.service';
 import {Member} from '../../../../models/memeber.model';
 import {MatDialog} from '@angular/material/dialog';
@@ -9,6 +9,9 @@ import {EventService} from '../../../../services/event.service';
 import {ToolService} from '../../../../services/tool.service';
 import {Router} from '@angular/router';
 import {PublicationService} from '../../../../services/publication.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-member-list',
@@ -19,11 +22,13 @@ export class MemberListComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
     // tslint:disable-next-line:variable-name
   protected _onDestroy = new Subject<void>();
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['id', 'cin', 'nom', 'email', 'cv', 'dateNaissance', 'actions'];
   dataSource: Member[] = [];
   memberToDelete: Member;
   students: Member[];
+  dataSource2: MatTableDataSource<Member>;
 
 
   constructor(
@@ -34,8 +39,6 @@ export class MemberListComponent implements OnInit, OnDestroy {
     private publicationService: PublicationService,
     private dialog: MatDialog,
   ) { }
-
-
   ngOnDestroy(): void {
     this._onDestroy.next();
     this._onDestroy.complete();
@@ -46,7 +49,10 @@ export class MemberListComponent implements OnInit, OnDestroy {
   }
 
   private fetchDataSource(): void {
-    this.memberService.getAllMembers().then(data => this.dataSource = data);
+    this.memberService.getAllMembers().then(data => {this.dataSource = data;
+                                                     this.dataSource2 = new MatTableDataSource(data);
+                                                     this.dataSource2.paginator = this.paginator;
+                                                     this.dataSource2.sort = this.sort; });
   }
   redirectToEdit(element: any): void {
     console.log(element.id);
@@ -101,5 +107,21 @@ export class MemberListComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  // tslint:disable-next-line:typedef use-lifecycle-interface
+  ngAfterViewInit() {
+    this.dataSource2.paginator = this.paginator;
+    this.dataSource2.sort = this.sort;
+  }
+
+  // tslint:disable-next-line:typedef
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource2.paginator) {
+      this.dataSource2.paginator.firstPage();
+    }
   }
 }

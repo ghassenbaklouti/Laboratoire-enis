@@ -1,6 +1,6 @@
 import {Publication} from './publication.model';
 import {Tool} from './tool.model';
-import {Event} from './event.model';
+import {Evenement} from './evenement.model';
 
 export interface Member {
   id: string;
@@ -8,12 +8,12 @@ export interface Member {
   nom: string;
   prenom: string;
   date: string;
-  photo: string;
+  photo: any;
   cv: string;
   email: string;
   password: string;
   pubs: Publication[];
-  events: Event[];
+  events: Evenement[];
   outils: Tool[];
   encadrant: Member;
   diplome: string;

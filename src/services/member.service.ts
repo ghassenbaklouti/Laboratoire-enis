@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {GLOBAL} from '../app/app-config';
 import {Utils} from '../utils/utils';
 import {Member} from '../models/memeber.model';
-import {Event} from '../models/event.model';
+import {Evenement} from '../models/evenement.model';
 import {Etudiant} from '../models/etudiant';
 import {Enseignant} from '../models/enseignant';
 

@@ -3,41 +3,83 @@
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
 
-    <mat-form-field>
-      <input matInput placeholder="cin" formControlName="cin">
-    </mat-form-field>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+        <input matInput placeholder="First Name" formControlName="nom">
+      </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+        <input matInput placeholder="Last Name" formControlName="prenom">
+      </mat-form-field>
+      </td>
+    </tr></table>
 
-    <mat-form-field>
-      <input matInput placeholder="First Name" formControlName="nom">
-    </mat-form-field>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Grade" formControlName="grade">
+        </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Etablissement" formControlName="etablissement">
+        </mat-form-field>
+      </td>
+    </tr></table>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="cin" formControlName="cin">
+        </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </td>
+    </tr></table>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Birth Date" type="date" formControlName="date">
+        </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="cv" formControlName="cv">
+        </mat-form-field>
+      </td>
+    </tr></table>
+    <table class="example-half-width" cellspacing="0"><tr>
+      <td>
+        <div class="col-md-6 container">
+          <form [formGroup]="addForm">
+            <div class="form-group">
+              <label for="image" style="margin-left: 0.5%;font-weight: bold">Image</label>
+              <input formControlName="image" type="file" name="image" class="form-control" (change)="onFileChange($event)" id="image">
+              <div *ngIf="f.image.touched && f.image.invalid" class="alert alert-danger">
+                <div *ngIf="f.image.errors.required">Image is required.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <br>
+              <img [src]="imageSrc" *ngIf="imageSrc" style="height:150px">
+            </div>
+          </form>
+        </div>
 
-    <mat-form-field>
-      <input matInput placeholder="Last Name" formControlName="prenom">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Birth Date" type="date" formControlName="date">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="cv" formControlName="cv">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Grade" formControlName="grade">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email" formControlName="email">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Etablissement" formControlName="etablissement">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Picture" formControlName="photo">
-    </mat-form-field>
-
-    <div class="form-element">
-      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
+      </td>
+      <td></td>
+    </tr></table>
+    <div class="form-element" style="margin-left: 0.5%">
+      <br>
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid || addForm.invalid">Submit</button>
       &nbsp;
       <button mat-raised-button color="warn" [routerLink]="'/members'">Back</button>
     </div>

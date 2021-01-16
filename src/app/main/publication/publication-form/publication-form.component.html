@@ -3,30 +3,41 @@
   <h2>{{isFormInEditMode() ? 'Edit Publication' : 'Create New Publication'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Created date" type="date" formControlName="date">
+        </mat-form-field>
+      </td>
+    </tr></table>
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Source" formControlName="sourcePdf">
+        </mat-form-field>
+      </td>
+      <td> &nbsp;</td>
+      <td>
+        <mat-form-field class="example-full-width-form">
+          <input matInput placeholder="Type" formControlName="type">
+        </mat-form-field>
+      </td>
+    </tr></table>
 
-    <mat-form-field>
-      <input matInput placeholder="Title" formControlName="title">
-    </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Created date" type="date" formControlName="date">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Source" formControlName="sourcePdf">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Type" formControlName="type">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Lien" formControlName="lien">
-    </mat-form-field>
+        <mat-form-field style="margin-left: 0.5%">
+          <input matInput placeholder="Lien" formControlName="lien">
+        </mat-form-field>
 
 
-
-    <div class="form-element">
+    <div class="form-element" style="margin-left: 0.5%">
+      <br>
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
       &nbsp;
       <button mat-raised-button color="warn" [routerLink]="'/articles'">Back</button>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Event} from '../models/event.model';
+import {Evenement} from '../models/evenement.model';
 import {Member} from '../models/memeber.model';
 
 
@@ -12,24 +12,24 @@ export class EventService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllEvents(): Promise<Event[]> {
-    return this.httpClient.get<Event[]>('http://localhost:8081/evenements').toPromise();
+  getAllEvents(): Promise<Evenement[]> {
+    return this.httpClient.get<Evenement[]>('http://localhost:8081/evenements').toPromise();
   }
 
-  getEventById(id: string): Promise<Event> {
-     return this.httpClient.get<Event>(`http://localhost:8081/evenement/${id}`).toPromise();
+  getEventById(id: string): Promise<Evenement> {
+     return this.httpClient.get<Evenement>(`http://localhost:8081/evenement/${id}`).toPromise();
 
   }
 
-  updateEvent(event: any): Promise<Event> {
+  updateEvent(event: any): Promise<Evenement> {
     console.log(event);
-    return this.httpClient.put<Event>(`http://localhost:8081/evenements/${event.id}`, event).toPromise();
+    return this.httpClient.put<Evenement>(`http://localhost:8081/evenements/${event.id}`, event).toPromise();
 
   }
 
-  createEvent(event: any): Promise<Event> {
+  createEvent(event: any): Promise<Evenement> {
     console.log(event);
-    return this.httpClient.post<Event>(`http://localhost:8081/evenement/add`, event).toPromise();
+    return this.httpClient.post<Evenement>(`http://localhost:8081/evenement/add`, event).toPromise();
 
   }
 

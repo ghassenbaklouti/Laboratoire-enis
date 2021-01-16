@@ -10,14 +10,25 @@ import {MemberService} from '../../../../services/member.service';
   styleUrls: ['./member-form-encadrant.component.scss']
 })
 export class MemberFormEncadrantComponent implements OnInit {
-  currentItemId: string;
-  item: Member;
-  form: FormGroup;
-  enseignantToSave: any;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
               ) { }
+
+
+  // tslint:disable-next-line:typedef
+  get f(){
+    return this.addForm.controls;
+  }
+  currentItemId: string;
+  item: Member;
+  form: FormGroup;
+  enseignantToSave: any;
+  imageSrc: string;
+  addForm = new FormGroup({
+    image: new FormControl('', Validators.required),
+    imageSrc: new FormControl('', Validators.required)
+  });
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
@@ -44,7 +55,6 @@ export class MemberFormEncadrantComponent implements OnInit {
       grade: new FormControl(item?.grade, [Validators.required]),
       etablissement: new FormControl(item?.etablissement, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
-      photo: new FormControl(item?.photo, [Validators.required]),
     });
   }
   isFormInEditMode(): boolean {
@@ -59,7 +69,7 @@ export class MemberFormEncadrantComponent implements OnInit {
         nom: objectToSubmit.nom,
         prenom: objectToSubmit.prenom,
         date: objectToSubmit.date,
-        photo: null,
+        photo: this.imageSrc,
         cv: objectToSubmit.cv,
         email: objectToSubmit.email,
         password: objectToSubmit.password,
@@ -75,6 +85,26 @@ export class MemberFormEncadrantComponent implements OnInit {
       this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members']));
     }else {
       this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
+    }
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if(event.target.files && event.target.files.length) {
+      const [image] = event.target.files;
+      reader.readAsDataURL(image);
+
+      reader.onload = () => {
+
+        this.imageSrc = reader.result as string;
+
+        this.addForm.patchValue({
+          imageSrc: reader.result
+        });
+
+      };
+
     }
   }
 

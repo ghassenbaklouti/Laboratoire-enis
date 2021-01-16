@@ -5,7 +5,12 @@
   </button>
 
 </div>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
+<div class=theme1>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+<table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 w-100-p">
   <ng-container matColumnDef="id">
     <th mat-header-cell class="px-12" *matHeaderCellDef>ID</th>
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
@@ -46,3 +51,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

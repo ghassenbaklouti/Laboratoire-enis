@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToolService} from '../../../../services/tool.service';
 import {Tool} from '../../../../models/tool.model';
-import {Event} from '../../../../models/event.model';
+import {Evenement} from '../../../../models/evenement.model';
 
 @Component({
   selector: 'app-tool-form',
@@ -46,7 +46,7 @@ export class ToolFormComponent implements OnInit {
 
   onSubmit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
-    const objectToSubmit: Event = {...this.item, ...this.form.value};
+    const objectToSubmit: Evenement = {...this.item, ...this.form.value};
     if (!!this.currentItemId) {
       this.toolService.updateTool(objectToSubmit).then(() => this.router.navigate(['./tools']));
     }else {

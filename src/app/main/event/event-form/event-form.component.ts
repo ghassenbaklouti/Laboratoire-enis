@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Event} from '../../../../models/event.model';
+import {Evenement} from '../../../../models/evenement.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../../../services/event.service';
 import {DatePipe} from '@angular/common';
@@ -13,7 +13,7 @@ import {DatePipe} from '@angular/common';
 export class EventFormComponent implements OnInit {
 
   currentItemId: string;
-  item: Event;
+  item: Evenement;
   form: FormGroup;
 
   constructor(private router: Router,
@@ -35,7 +35,7 @@ export class EventFormComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  initForm(item: Event) {
+  initForm(item: Evenement) {
     this.form = new FormGroup({
 
       title: new FormControl(item?.title, [Validators.required]),
@@ -50,7 +50,7 @@ export class EventFormComponent implements OnInit {
 
   onSubmit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
-    const objectToSubmit: Event = {...this.item, ...this.form.value};
+    const objectToSubmit: Evenement = {...this.item, ...this.form.value};
     if (!!this.currentItemId) {
       this.eventService.updateEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
     }else {

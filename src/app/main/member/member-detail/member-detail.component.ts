@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MemberService} from '../../../../services/member.service';
 import {Publication} from '../../../../models/publication.model';
-import {Event} from '../../../../models/event.model';
+import {Evenement} from '../../../../models/evenement.model';
 import {Tool} from '../../../../models/tool.model';
 
 
