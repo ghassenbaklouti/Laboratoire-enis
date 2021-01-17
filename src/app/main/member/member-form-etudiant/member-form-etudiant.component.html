@@ -33,9 +33,20 @@
 
         <table class="example-full-width" cellspacing="0"><tr>
           <td>
-            <mat-form-field class="example-full-width-form">
-              <input matInput placeholder="Birth Date" type="date" formControlName="date">
-            </mat-form-field>
+            <table class="example-full-width" cellspacing="0"><tr>
+              <td>
+                <mat-form-field class="example-full-width-form">
+                  <input matInput placeholder="Birth Date" type="date" formControlName="date">
+                </mat-form-field>
+              </td>
+              <td> &nbsp;</td>
+              <td>
+                <mat-form-field class="example-full-width-form">
+                  <input matInput placeholder="Inscription Date" type="date" formControlName="dateInscription">
+                </mat-form-field>
+              </td>
+            </tr></table>
+
           </td>
           <td> &nbsp;</td>
           <td>
@@ -44,19 +55,13 @@
             </mat-form-field>
           </td>
         </tr></table>
-        <table class="example-full-width" cellspacing="0"><tr>
-          <td>
-            <mat-form-field class="example-full-width-form">
-              <input matInput placeholder="Diploma" formControlName="diplome">
-            </mat-form-field>
-          </td>
-          <td> &nbsp;</td>
-          <td>
-            <mat-form-field class="example-full-width-form">
-              <input matInput placeholder="Inscription Date" type="date" formControlName="dateInscription">
-            </mat-form-field>
-          </td>
-        </tr></table>
+        <mat-form-field style="margin-left: 0.5%">
+          <mat-label>Diploma</mat-label>
+          <mat-select [(ngModel)]="selectedDiploma" formControlName="diplome">
+            <mat-option value="Master">Master</mat-option>
+            <mat-option value="Thesis">Thesis</mat-option>
+          </mat-select>
+        </mat-form-field>
         <mat-form-field style="margin-left: 0.5%">
           <mat-label>Encadrant</mat-label>
           <mat-select [(ngModel)]="selectedEncadrant"  formControlName="encadrant">
@@ -64,7 +69,7 @@
               *ngFor="let encadrant of encadrants" [value]="encadrant">{{encadrant.prenom}}</mat-option>
           </mat-select>
         </mat-form-field>
-
+        <br>
         <table class="example-half-width" cellspacing="0"><tr>
           <td>
             <div class="col-md-6 container">

@@ -7,5 +7,45 @@
 }
 
 .card{
-  margin: 10em;
+  margin-top: 10em;
+  margin-left: 30em;
+  margin-right: 30em;
 }
+
+.image-cropper {
+  margin-left: 40%;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+.example-full-width {
+  width: 100%;
+}
+.example-full-width-right{
+
+  font-weight: bold;
+  color: #5D79C4;
+  width: 100%;
+
+}
+.example-full-width-left{
+
+  font-weight: bold;
+  color: #5D79C4;
+  width: 100%;
+
+}
+.table1{
+  margin-right: 20%;
+  margin-left: 15%;
+}
+

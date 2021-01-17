@@ -14,6 +14,7 @@ import {Tool} from '../../../../models/tool.model';
   styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit {
+  panelOpenState = false;
   currentItemId: string;
   item: Member = {
     id: null,

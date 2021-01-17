@@ -9,6 +9,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     MaterialModule,
@@ -19,6 +21,7 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
+    MatExpansionModule,
     ConfirmDialogModule,
     MatSortModule
   ],
@@ -31,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatGridListModule,
     ConfirmDialogModule,
+    MatExpansionModule,
     MatMenuModule,
     MatSortModule
   ],

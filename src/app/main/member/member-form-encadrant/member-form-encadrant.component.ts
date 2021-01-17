@@ -25,10 +25,7 @@ export class MemberFormEncadrantComponent implements OnInit {
   form: FormGroup;
   enseignantToSave: any;
   imageSrc: string;
-  addForm = new FormGroup({
-    image: new FormControl('', Validators.required),
-    imageSrc: new FormControl('', Validators.required)
-  });
+  addForm: FormGroup;
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
@@ -36,6 +33,8 @@ export class MemberFormEncadrantComponent implements OnInit {
     if (!!this.currentItemId) {
       this.memberService.getMemberById(this.currentItemId).then(item => {
         this.item = item;
+
+        this.imageSrc = this.item.photo;
         this.initForm(item);
         console.log(item);
       });
@@ -45,6 +44,10 @@ export class MemberFormEncadrantComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   initForm(item: Member) {
+    this.addForm = new FormGroup({
+      image: new FormControl(item?.photo, Validators.required),
+      imageSrc: new FormControl(item?.photo, Validators.required)
+    })
     this.form = new FormGroup({
 
       cin: new FormControl(item?.cin, [Validators.required]),

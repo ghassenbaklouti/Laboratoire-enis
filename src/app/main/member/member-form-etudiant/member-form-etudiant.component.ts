@@ -23,6 +23,7 @@ export class MemberFormEtudiantComponent implements OnInit {
   etudiantToSave: any;
   imageSrc: string;
   addForm: FormGroup;
+  selectedDiploma: string;
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
@@ -36,6 +37,7 @@ export class MemberFormEtudiantComponent implements OnInit {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     if (!!this.currentItemId) {
       this.memberService.getMemberById(this.currentItemId).then(item => {
+        this.selectedDiploma = item.diplome;
         this.memberService.getAllTeachers().then(data => {this.encadrants = data;
           // tslint:disable-next-line:max-line-length
                                                           this.selectedEncadrant = data.find(encadrant => this.item.encadrant.id === encadrant.id); });
