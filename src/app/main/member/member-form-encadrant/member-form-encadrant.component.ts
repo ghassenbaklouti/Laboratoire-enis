@@ -47,7 +47,7 @@ export class MemberFormEncadrantComponent implements OnInit {
     this.addForm = new FormGroup({
       image: new FormControl(item?.photo, Validators.required),
       imageSrc: new FormControl(item?.photo, Validators.required)
-    })
+    });
     this.form = new FormGroup({
 
       cin: new FormControl(item?.cin, [Validators.required]),

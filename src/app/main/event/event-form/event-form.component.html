@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h4>{{isFormInEditMode() ? 'Edit Event' : 'Create New Event'}}</h4>
+  <h2>{{isFormInEditMode() ? 'Edit Event' : 'Create New Event'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
 

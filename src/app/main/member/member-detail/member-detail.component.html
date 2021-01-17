@@ -2,9 +2,8 @@
   <mat-card-header>
     <div class="image-cropper">
       <img [src]="item.photo" class="rounded" />
+
     </div>
-    <mat-card-title></mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -183,7 +182,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-stroked-button color="primary" [routerLink]="'/members'">Back</button>
+  <mat-card-actions align="right">
+    <button mat-stroked-button color="warn" [routerLink]="'/members'">Back</button>
   </mat-card-actions>
 </mat-card>
