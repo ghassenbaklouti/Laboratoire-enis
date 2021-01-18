@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MemberService} from '../../../../services/member.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Member} from '../../../../models/memeber.model';
+import {User} from '../../../../models/user';
 
 @Component({
   selector: 'app-member-form',
@@ -13,6 +14,7 @@ export class MemberFormComponent implements OnInit {
   currentItemId: string;
   item: Member;
   form: FormGroup;
+  userSignup: User;
 
   constructor(
     private router: Router,
@@ -52,6 +54,7 @@ export class MemberFormComponent implements OnInit {
   onSubmit(): void {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
+
     this.memberService.saveMember(objectToSubmit).then(() => this.router.navigate(['./members']));
 
   }

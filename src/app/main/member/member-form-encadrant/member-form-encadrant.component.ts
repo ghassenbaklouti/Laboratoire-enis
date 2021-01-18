@@ -3,6 +3,8 @@ import {Member} from '../../../../models/memeber.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MemberService} from '../../../../services/member.service';
+import {User} from '../../../../models/user';
+import {LoginService} from '../../../../services/login.service';
 
 @Component({
   selector: 'app-member-form-encadrant',
@@ -11,6 +13,7 @@ import {MemberService} from '../../../../services/member.service';
 })
 export class MemberFormEncadrantComponent implements OnInit {
   constructor(private router: Router,
+              private loginservice: LoginService,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
               ) { }
@@ -26,6 +29,7 @@ export class MemberFormEncadrantComponent implements OnInit {
   enseignantToSave: any;
   imageSrc: string;
   addForm: FormGroup;
+  userSignup: User = new User();
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
@@ -83,10 +87,17 @@ export class MemberFormEncadrantComponent implements OnInit {
         etablissement: objectToSubmit.etablissement
     };
 
+    this.userSignup.email = objectToSubmit.email;
+    this.userSignup.password = '123456789';
+    this.userSignup.username = objectToSubmit.email;
+    this.userSignup.role = ['user'];
+
 
     if (!!this.currentItemId) {
       this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members']));
     }else {
+      this.loginservice.register(this.userSignup);
+      console.log(this.userSignup);
       this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
     }
   }

@@ -34,6 +34,9 @@ export class MemberService {
   getFullMemberById(idMember: string): Promise<Member> {
     return this.httpClient.get<Member>(`http://localhost:8082/fullmember/${idMember}`).toPromise();
   }
+  getMemberByEmail(email: string): Promise<Member> {
+    return this.httpClient.get<Member>(`http://localhost:8082/membre/search/email/${email}`).toPromise();
+  }
 
   /**
    * create a new member or update an old member.

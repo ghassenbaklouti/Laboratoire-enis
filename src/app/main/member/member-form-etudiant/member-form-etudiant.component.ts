@@ -8,6 +8,8 @@ import {Publication} from '../../../../models/publication.model';
 import {Evenement} from '../../../../models/evenement.model';
 import {Tool} from '../../../../models/tool.model';
 import {Enseignant} from '../../../../models/enseignant';
+import {User} from '../../../../models/user';
+import {LoginService} from '../../../../services/login.service';
 
 @Component({
   selector: 'app-member-form-etudiant',
@@ -24,7 +26,9 @@ export class MemberFormEtudiantComponent implements OnInit {
   imageSrc: string;
   addForm: FormGroup;
   selectedDiploma: string;
+  userSignup: User = new User();
   constructor(private router: Router,
+              private loginservice: LoginService,
               private activatedRoute: ActivatedRoute,
               private memberService: MemberService,
   ) { }
@@ -106,11 +110,17 @@ export class MemberFormEtudiantComponent implements OnInit {
         etablissement: objectToSubmit.encadrant.etablissement
       }
     };
+    this.userSignup.email = objectToSubmit.email;
+    this.userSignup.password = '123456789';
+    this.userSignup.username = objectToSubmit.email;
+    this.userSignup.role = ['user'];
 
     if (!!this.currentItemId) {
       this.memberService.updateEtudiant(this.currentItemId, this.etudiantToSave).then(() => this.router.navigate(['./members']));
     }else {
       console.log(this.etudiantToSave);
+      this.loginservice.register(this.userSignup);
+      console.log(this.userSignup);
       this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members']));
     }
   }

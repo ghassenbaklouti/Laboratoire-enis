@@ -23,6 +23,7 @@ import { MemberDetailComponent } from './main/member/member-detail/member-detail
 import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
 import { AuteurPublicationListComponent } from './main/publication/auteur-publication-list/auteur-publication-list.component';
+import { LoginComponent } from './main/login/login.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AuteurPublicationListComponent } from './main/publication/auteur-public
     MemberFormEtudiantComponent,
     MemberFormEncadrantComponent,
     AuteurPublicationListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

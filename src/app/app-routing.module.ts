@@ -15,9 +15,15 @@ import { MemberFormEncadrantComponent } from './main/member/member-form-encadran
 import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/member-form-etudiant.component';
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 import {AuteurPublicationListComponent} from './main/publication/auteur-publication-list/auteur-publication-list.component';
+import {LoginComponent} from './main/login/login.component';
 
 
 const routes: Routes = [
+  {
+    path: 'login',
+    pathMatch: 'full',
+    component: LoginComponent,
+  },
   {
     path: '',
     pathMatch: 'full',
