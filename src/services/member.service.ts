@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GLOBAL} from '../app/app-config';
 import {Utils} from '../utils/utils';
 import {Member} from '../models/memeber.model';
@@ -12,30 +12,28 @@ import {Enseignant} from '../models/enseignant';
 })
 export class MemberService {
   public placeholderMembers: Member[] = GLOBAL._DB.members;
-
   constructor(
     private httpClient: HttpClient,
-  ) {
-  }
+  ) {}
 
   getAllMembers(): Promise<Member[]> {
-    return this.httpClient.get<Member[]>('http://localhost:8082/membres').toPromise();
+    return this.httpClient.get<Member[]>('http://localhost:9999/membre-service/membres').toPromise();
     // return new Promise(resolve => resolve(this.placeholderMembers));
   }
   getAllTeachers(): Promise<Enseignant[]> {
-    return this.httpClient.get<Enseignant[]>('http://localhost:8082/enseignants').toPromise();
+    return this.httpClient.get<Enseignant[]>('http://localhost:9999/membre-service/enseignants').toPromise();
     // return new Promise(resolve => resolve(this.placeholderMembers));
   }
 
   getMemberById(id: string): Promise<Member> {
-    return this.httpClient.get<Member>(`http://localhost:8082//membre/${id}`).toPromise();
+    return this.httpClient.get<Member>(`http://localhost:9999/membre-service/membre/${id}`).toPromise();
 
   }
   getFullMemberById(idMember: string): Promise<Member> {
-    return this.httpClient.get<Member>(`http://localhost:8082/fullmember/${idMember}`).toPromise();
+    return this.httpClient.get<Member>(`http://localhost:9999/membre-service/fullmember/${idMember}`).toPromise();
   }
   getMemberByEmail(email: string): Promise<Member> {
-    return this.httpClient.get<Member>(`http://localhost:8082/membre/search/email/${email}`).toPromise();
+    return this.httpClient.get<Member>(`http://localhost:9999/membre-service/membre/search/email/${email}`).toPromise();
   }
 
   /**
@@ -54,12 +52,18 @@ export class MemberService {
   }
   createEtudiant(etudiant: any): Promise<Member> {
     console.log(etudiant);
-    return this.httpClient.post<Member>(`http://localhost:8082/membres/etudiant`, etudiant).toPromise();
+    console.log(localStorage.getItem('token'));
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.post<Member>(`http://localhost:9999/membre-service/membres/etudiant`, etudiant, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
 
   }
   createEnseignant(enseignant: any): Promise<Member> {
     console.log(enseignant);
-    return this.httpClient.post<Member>(`http://localhost:8082/membres/enseignant`, enseignant).toPromise();
+    return this.httpClient.post<Member>(`http://localhost:9999/membre-service/membres/enseignant`, enseignant, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
 
   }
 
