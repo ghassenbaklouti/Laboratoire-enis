@@ -31,13 +31,19 @@
         <div class="toolbar-separator"></div>
         <button [matMenuTriggerFor]="userMenu" class="toolbar-button" mat-button *ngIf="userexist">
           <div fxLayout="row" fxLayoutAlign="center center">
-            <!--          <img class="avatar mr-0 mr-sm-16" [src]="user.photoURL">-->
-            <mat-icon>account_circle</mat-icon>
+            <img *ngIf="photo" class="avatar mr-0 mr-sm-16" [src]="photo">
+            <mat-icon *ngIf="!photo">account_circle</mat-icon>
             <span class="username mx-12" fxHide fxShow.gt-sm >{{username}}</span>
             <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
           </div>
         </button>
-        <button *ngIf="!userexist" [routerLink]="'/login'">Login</button>
+        <button class="toolbar-button" mat-button *ngIf="!userexist" [routerLink]="'/login'">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <!--          <img class="avatar mr-0 mr-sm-16" [src]="user.photoURL">-->
+            <mat-icon>account_circle</mat-icon>
+            <span class="username mx-12" fxHide fxShow.gt-sm >Login</span>
+          </div>
+        </button>
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false" >
 

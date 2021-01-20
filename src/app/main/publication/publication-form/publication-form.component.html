@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h2>{{isFormInEditMode() ? 'Edit Publication' : 'Create New Publication'}}</h2>
+  <h2 class="title">{{isFormInEditMode() ? 'Edit Publication' : 'Create New Publication'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
     <table class="example-full-width" cellspacing="0"><tr>
@@ -36,11 +36,10 @@
         </mat-form-field>
 
 
-    <div class="form-element" style="margin-left: 0.5%">
+    <div class="form-element" style="margin-left: 0.5%" fxLayoutAlign="end center">
       <br>
+      <button mat-raised-button color="warn" [routerLink]="'/articles'">Back</button>&nbsp;
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
-      &nbsp;
-      <button mat-raised-button color="warn" [routerLink]="'/articles'">Back</button>
     </div>
 
 

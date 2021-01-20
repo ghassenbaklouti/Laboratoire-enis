@@ -1,12 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Member} from '../../../../models/memeber.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ToolService} from '../../../../services/tool.service';
-import {ConfirmDialogComponent} from "../../../../@root/components/confirm-dialog/confirm-dialog.component";
-import {takeUntil} from "rxjs/operators";
+import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
+import {takeUntil} from 'rxjs/operators';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-auteur-list',
@@ -23,7 +26,11 @@ export class AuteurListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'cin', 'nom', 'email', 'cv', 'dateNaissance', 'actions'];
   dataSource: Member[] = [];
   form: FormGroup;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource2: MatTableDataSource<Member>;
   auteur: Member;
+  userexist: any;
   cin: number ;
 
   constructor(private toolService: ToolService,
@@ -39,6 +46,7 @@ export class AuteurListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm(null);
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
 
   // tslint:disable-next-line:typedef
@@ -50,7 +58,10 @@ export class AuteurListComponent implements OnInit, OnDestroy {
 
   private fetchDataSource(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
-    this.toolService.getToolMembers(this.currentItemId).then(data => this.dataSource = data);
+    this.toolService.getToolMembers(this.currentItemId).then(data => {this.dataSource = data;
+                                                                      this.dataSource2 = new MatTableDataSource(data);
+                                                                      this.dataSource2.paginator = this.paginator;
+                                                                      this.dataSource2.sort = this.sort; });
   }
 
   onSubmit(): void {
@@ -79,6 +90,22 @@ export class AuteurListComponent implements OnInit, OnDestroy {
         this.toolService.removeAuteurFromTool(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource());
       }
     });
+  }
+  // tslint:disable-next-line:typedef
+  ngAfterViewInit() {
+    this.dataSource2.paginator = this.paginator;
+    this.dataSource2.sort = this.sort;
+  }
+
+
+  // tslint:disable-next-line:typedef
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource2.paginator) {
+      this.dataSource2.paginator.firstPage();
+    }
   }
 
 }

@@ -68,20 +68,27 @@ export class MemberService {
   }
 
   removeMemberById(id: string): Promise<void> {
-    return this.httpClient.delete<void>(`http://localhost:8082/membres/${id}`).toPromise();
+    return this.httpClient.delete<void>(`http://localhost:9999/membre-service/membres/${id}`, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
   }
 
   getStudentsbyEncadrant(enseignant: any): Promise<Member[]> {
     console.log(enseignant);
     // @ts-ignore
-    return this.httpClient.post<Member[]>(`http://localhost:8082/students/enseignant`, enseignant).toPromise();
+    return this.httpClient.post<Member[]>(`http://localhost:9999/membre-service/students/enseignant`, enseignant).toPromise();
 
   }
   updateEtudiant(id: string, etudiant: Member): Promise<Member>{
-    return this.httpClient.put<Member>(`http://localhost:8082/membres/etudiant/${id}`, etudiant).toPromise();
+    return this.httpClient.put<Member>(`http://localhost:9999/membre-service/membres/etudiant/${id}`, etudiant, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
   }
   updateTeacher(id: string, enseignant: Member): Promise<Member>{
-    return this.httpClient.put<Member>(`http://localhost:8082/membres/enseignant/${id}`, enseignant).toPromise();
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.put<Member>(`http://localhost:9999/membre-service/membres/enseignant/${id}`, enseignant, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
   }
 
 }

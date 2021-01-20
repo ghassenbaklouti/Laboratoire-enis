@@ -25,6 +25,7 @@ export class ToolListComponent implements OnInit, OnDestroy  {
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['id', 'CreatedDate', 'Source', 'actions'];
   dataSource: Tool[] = [];
+  userexist: any;
   dataSource2: MatTableDataSource<Tool>;
   constructor(private toolService: ToolService,
               private dialog: MatDialog) { }
@@ -36,6 +37,7 @@ export class ToolListComponent implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
 
   private fetchDataSource(): void {

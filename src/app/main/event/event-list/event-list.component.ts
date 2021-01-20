@@ -25,6 +25,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['id', 'title', 'lieu', 'date', 'actions'];
   dataSource: Evenement[] = [];
+  userexist: any;
   dataSource2: MatTableDataSource<Evenement>;
   constructor(private eventService: EventService,
               private dialog: MatDialog) { }
@@ -35,6 +36,7 @@ export class EventListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
 
   private fetchDataSource(): void {

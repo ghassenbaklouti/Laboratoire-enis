@@ -1,16 +1,24 @@
-<form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
-  <mat-form-field>
-    <input matInput placeholder="Email" formControlName="email">
-  </mat-form-field>
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title style="color: #3F51B5">Login</mat-card-title>
+      <br><br>
+    </mat-card-header>
 
-  <mat-form-field>
-    <input matInput placeholder="Password" formControlName="password">
-  </mat-form-field>
+    <form class="example-form" [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <br><br>
+        <mat-form-field  class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </mat-card-content>
+      <br><br>
+      <button mat-button color="primary" class="btn-block" type="submit" mat-button [disabled]="form.invalid">Log in</button>
+    </form>
+  </mat-card>
 
-
-  <div class="form-element">
-    <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
-  </div>
-
-</form>
+</div>

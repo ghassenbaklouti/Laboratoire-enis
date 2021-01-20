@@ -1,4 +1,5 @@
-<div class="my-16" fxLayout="row" fxLayoutAlign="end center">
+<h2 class="title">Participant List</h2>
+<div class="my-16" fxLayout="row" fxLayoutAlign="end center" *ngIf="userexist">
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()"  class="form" fxLayout="column">
     <mat-form-field>
       <input matInput placeholder="cin" type="text" formControlName="cin" [(ngModel)]="cin">
@@ -8,8 +9,13 @@
     </div>
   </form>
 </div>
+<div class=theme1>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100-p">
+<table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 w-100-p">
   <ng-container matColumnDef="id">
     <th mat-header-cell class="px-12" *matHeaderCellDef> ID</th>
     <td mat-cell class="px-12" *matCellDef="let element"> {{element.id}} </td>
@@ -50,7 +56,7 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-60" *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="removeparticipant(element.id)">
+      <button mat-icon-button color="warn" (click)="removeparticipant(element.id)" *ngIf="userexist">
         <mat-icon>delete</mat-icon>
       </button>
 
@@ -60,3 +66,9 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+&nbsp;
+<div class="form-element" style="margin-right: 3%" fxLayoutAlign="end center">
+  <button mat-raised-button color="warn" [routerLink]="'/events'">Back</button>
+</div>

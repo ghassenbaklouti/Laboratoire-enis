@@ -23,7 +23,10 @@ export class EventService {
 
   updateEvent(event: any): Promise<Evenement> {
     console.log(event);
-    return this.httpClient.put<Evenement>(`http://localhost:9999/evenement-service/evenements/${event.id}`, event).toPromise();
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.put<Evenement>(`http://localhost:9999/evenement-service/evenements/${event.id}`, event, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
 
   }
 
@@ -36,7 +39,9 @@ export class EventService {
   }
 
   removeEventById(id: string): Promise<void> {
-     return this.httpClient.delete<void>(`http://localhost:9999/evenement-service/evenements/${id}`).toPromise();
+     return this.httpClient.delete<void>(`http://localhost:9999/evenement-service/evenements/${id}`, {headers: new HttpHeaders({
+         Authorization: 'Bearer ' + localStorage.getItem('token')
+       })}).toPromise();
   }
 
   getEventsMembers(id: string): Promise<Member[]> {
@@ -63,7 +68,9 @@ export class EventService {
   }
   removeEventParticipants(idevent: number): Promise<void>{
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.delete<void>(`http://localhost:9999/membre-service/member/event/delete/${idevent}`).toPromise();
+    return this.httpClient.delete<void>(`http://localhost:9999/membre-service/member/event/delete/${idevent}`, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>{{isFormInEditMode() ? 'Edit Teacher' : 'Create New Teacher'}}</h2>
+  <h2 class="title">{{isFormInEditMode() ? 'Edit Teacher' : 'Create New Teacher'}}</h2>
 
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" class="form" fxLayout="column">
 
@@ -77,11 +77,10 @@
       </td>
       <td></td>
     </tr></table>
-    <div class="form-element" style="margin-left: 0.5%">
+    <div class="form-element" style="margin-left: 0.5%" fxLayoutAlign="end center">
       <br>
+      <button mat-raised-button color="warn" [routerLink]="'/members'">Back</button>  &nbsp;
       <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid || addForm.invalid">Submit</button>
-      &nbsp;
-      <button mat-raised-button color="warn" [routerLink]="'/members'">Back</button>
     </div>
 
   </form>

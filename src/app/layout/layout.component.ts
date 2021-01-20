@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {MemberService} from '../../services/member.service';
 
 @Component({
+
   selector: 'layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
@@ -12,6 +13,7 @@ export class LayoutComponent implements OnInit {
 
   userexist: any;
   username: string;
+  photo: string;
   constructor(private loginservice: LoginService,
               private memberService: MemberService,
               private router: Router) { }
@@ -34,6 +36,7 @@ export class LayoutComponent implements OnInit {
       this.memberService.getMemberByEmail(this.userexist).then(data => {
         console.log(this.userexist);
         this.username = data?.nom + ' ' + data?.prenom;
+        this.photo = data?.photo;
         console.log(this.username);
       });
     }

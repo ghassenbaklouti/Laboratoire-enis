@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Member} from '../../../../models/memeber.model';
 import {MatDialog} from '@angular/material/dialog';
@@ -7,6 +7,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
 import {takeUntil} from 'rxjs/operators';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-participant-list',
@@ -22,8 +25,12 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
   currentItemId: string;
   displayedColumns: string[] = ['id', 'cin', 'nom', 'email', 'cv', 'dateNaissance', 'actions'];
   dataSource: Member[] = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   form: FormGroup;
   participant: Member;
+  userexist: any;
+  dataSource2: MatTableDataSource<Member>;
   cin: number ;
   constructor( private eventService: EventService,
                private router: Router,
@@ -38,6 +45,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm(null);
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
 
   // tslint:disable-next-line:typedef
@@ -49,7 +57,10 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
 
   private fetchDataSource(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
-    this.eventService.getEventsMembers(this.currentItemId).then(data => this.dataSource = data);
+    this.eventService.getEventsMembers(this.currentItemId).then(data => {this.dataSource = data;
+                                                                         this.dataSource2 = new MatTableDataSource(data);
+                                                                         this.dataSource2.paginator = this.paginator;
+                                                                         this.dataSource2.sort = this.sort; });
   }
 
   onSubmit(): void {
@@ -78,5 +89,21 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         this.eventService.removeParticipantFromEvent(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource());
       }
     });
+  }
+  // tslint:disable-next-line:typedef use-lifecycle-interface
+  ngAfterViewInit() {
+    this.dataSource2.paginator = this.paginator;
+    this.dataSource2.sort = this.sort;
+  }
+
+
+  // tslint:disable-next-line:typedef
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource2.paginator) {
+      this.dataSource2.paginator.firstPage();
+    }
   }
 }

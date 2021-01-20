@@ -29,6 +29,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   memberToDelete: Member;
   students: Member[];
   dataSource2: MatTableDataSource<Member>;
+  userexist: any;
 
 
   constructor(
@@ -46,6 +47,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
 
   private fetchDataSource(): void {

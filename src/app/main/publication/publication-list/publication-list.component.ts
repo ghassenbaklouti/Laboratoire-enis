@@ -25,6 +25,7 @@ export class PublicationListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'title', 'date', 'type', 'lien', 'source', 'actions'];
   dataSource: Publication[] = [];
   dataSource2: MatTableDataSource<Publication>;
+  userexist: any;
   constructor(private publicationService: PublicationService,
               private dialog: MatDialog) { }
   ngOnDestroy(): void {
@@ -34,6 +35,7 @@ export class PublicationListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchDataSource();
+    this.userexist = localStorage.getItem('user');
   }
   private fetchDataSource(): void {
     this.publicationService.getAllPublications().then(data => {this.dataSource = data;
