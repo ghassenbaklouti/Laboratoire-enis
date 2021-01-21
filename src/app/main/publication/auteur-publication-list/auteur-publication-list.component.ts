@@ -32,7 +32,8 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   dataSource2: MatTableDataSource<Member>;
   cin: number ;
-
+  userRole: any;
+  memberId: any;
   constructor(private publicationService: PublicationService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -47,6 +48,8 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
     this.initForm(null);
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
+    this.memberId = localStorage.getItem('membreId');
   }
   private fetchDataSource(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
@@ -98,7 +101,15 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
     this.dataSource2.paginator = this.paginator;
     this.dataSource2.sort = this.sort;
   }
-
+  verifierUser(id: any): boolean{
+    for (const auteur of this.dataSource){
+      // tslint:disable-next-line:triple-equals
+      if (auteur.id == id) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   // tslint:disable-next-line:typedef
   applyFilter(event: Event) {

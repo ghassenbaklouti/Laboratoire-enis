@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
 import {MemberService} from '../../services/member.service';
@@ -11,9 +11,11 @@ import {MemberService} from '../../services/member.service';
 })
 export class LayoutComponent implements OnInit {
 
+  backbutton: EventEmitter<any> = new EventEmitter<any>();
   userexist: any;
   username: string;
   photo: string;
+  memberid: any;
   constructor(private loginservice: LoginService,
               private memberService: MemberService,
               private router: Router) { }
@@ -32,6 +34,7 @@ export class LayoutComponent implements OnInit {
   }
   loadMember(): void{
     this.userexist = localStorage.getItem('user');
+    this.memberid = localStorage.getItem('membreId');
     if (this.userexist){
       this.memberService.getMemberByEmail(this.userexist).then(data => {
         console.log(this.userexist);

@@ -32,6 +32,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   students: Member[];
   dataSource2: MatTableDataSource<Member>;
   userexist: any;
+  userRole: any;
   userToDelete: User;
 
 
@@ -52,6 +53,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
   }
 
   private fetchDataSource(): void {

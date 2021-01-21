@@ -1,7 +1,7 @@
 <h2 class="title">Member List</h2>
 <div class="my-16" fxLayout="row" fxLayoutAlign="end center">
 
-  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" *ngIf="userexist">
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" *ngIf=" userRole=='ROLE_ADMIN' ">
     <mat-icon class="s-24 mr-4">add</mat-icon>
     Create New
   </button>
@@ -61,10 +61,10 @@
       <button mat-icon-button color="primary" [routerLink]="element.id + '/detail'">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button color="primary" (click)="redirectToEdit(element)" *ngIf="userexist">
+      <button mat-icon-button color="primary" (click)="redirectToEdit(element)" *ngIf="userRole=='ROLE_ADMIN'">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)" *ngIf="userexist">
+      <button mat-icon-button color="warn" (click)="onRemoveAccount(element.id)" *ngIf="userRole=='ROLE_ADMIN'">
         <mat-icon>delete</mat-icon>
       </button>
 

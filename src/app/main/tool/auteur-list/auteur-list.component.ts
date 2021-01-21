@@ -31,6 +31,8 @@ export class AuteurListComponent implements OnInit, OnDestroy {
   dataSource2: MatTableDataSource<Member>;
   auteur: Member;
   userexist: any;
+  userRole: any;
+  memberId: any;
   cin: number ;
 
   constructor(private toolService: ToolService,
@@ -47,6 +49,8 @@ export class AuteurListComponent implements OnInit, OnDestroy {
     this.initForm(null);
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
+    this.memberId = localStorage.getItem('membreId');
   }
 
   // tslint:disable-next-line:typedef
@@ -95,6 +99,15 @@ export class AuteurListComponent implements OnInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource2.paginator = this.paginator;
     this.dataSource2.sort = this.sort;
+  }
+  verifierUser(id: any): boolean{
+    for (const auteur of this.dataSource){
+      // tslint:disable-next-line:triple-equals
+      if (auteur.id == id) {
+        return true;
+      }
+    }
+    return false;
   }
 
 

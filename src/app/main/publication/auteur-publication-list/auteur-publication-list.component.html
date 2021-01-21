@@ -1,5 +1,5 @@
 <h2 class="title">Author List</h2>
-<div class="my-16" fxLayout="row" fxLayoutAlign="end center" *ngIf="userexist">
+<div class="my-16" fxLayout="row" fxLayoutAlign="end center" *ngIf="userRole=='ROLE_ADMIN' || verifierUser(memberId)">
   <form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()"  class="form" fxLayout="column">
     <mat-form-field>
       <input matInput placeholder="cin" type="text" formControlName="cin" [(ngModel)]="cin">
@@ -57,7 +57,7 @@
   <ng-container matColumnDef="actions" stickyEnd>
     <th mat-header-cell class="px-12 w-120" *matHeaderCellDef></th>
     <td mat-cell class="px-12 w-60" *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="removeauteur(element.id)" *ngIf="userexist">
+      <button mat-icon-button color="warn" (click)="removeauteur(element.id)" *ngIf="userRole=='ROLE_ADMIN' || verifierUser(memberId)">
         <mat-icon>delete</mat-icon>
       </button>
 

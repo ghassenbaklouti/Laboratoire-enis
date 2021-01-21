@@ -47,7 +47,7 @@
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false" >
 
-          <button class="" mat-menu-item>
+          <button class="" mat-menu-item [routerLink]="'/members/' + memberid + '/detail'">
             <mat-icon>account_box</mat-icon>
             <span>Profile</span>
           </button>

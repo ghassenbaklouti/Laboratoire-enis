@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user';
 import {LoginService} from '../../../services/login.service';
 import {Router} from '@angular/router';
+import {MemberService} from '../../../services/member.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   item: User = new User();
   form: FormGroup;
   constructor(private loginservice: LoginService,
+              private membreservice: MemberService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class LoginComponent implements OnInit {
 
     this.item.username = this.form.value.email;
     this.loginservice.login(this.item).then(res => {
+      this.membreservice.getMemberByEmail(res.email).then(data =>{
+        localStorage.setItem('membreId', data.id);
+      });
       console.log(res);
       localStorage.setItem('user', res.email);
       localStorage.setItem('role', res.roles);

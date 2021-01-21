@@ -32,6 +32,8 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
   userexist: any;
   dataSource2: MatTableDataSource<Member>;
   cin: number ;
+  userRole: any;
+  memberId: any;
   constructor( private eventService: EventService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
@@ -46,6 +48,8 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     this.initForm(null);
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
+    this.memberId = localStorage.getItem('membreId');
   }
 
   // tslint:disable-next-line:typedef
@@ -72,6 +76,15 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
         this.fetchDataSource());
       this.initForm(null); });
 
+  }
+  verifierUser(id: any): boolean{
+    for (const auteur of this.dataSource){
+      // tslint:disable-next-line:triple-equals
+      if (auteur.id == id) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private removeparticipant(memberid: any ): void {
