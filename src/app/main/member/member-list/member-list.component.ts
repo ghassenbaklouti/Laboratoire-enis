@@ -12,6 +12,8 @@ import {PublicationService} from '../../../../services/publication.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {LoginService} from "../../../../services/login.service";
+import {User} from "../../../../models/user";
 
 @Component({
   selector: 'app-member-list',
@@ -30,6 +32,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
   students: Member[];
   dataSource2: MatTableDataSource<Member>;
   userexist: any;
+  userToDelete: User;
 
 
   constructor(
@@ -39,6 +42,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
     private toolService: ToolService,
     private publicationService: PublicationService,
     private dialog: MatDialog,
+    private loginService: LoginService
   ) { }
   ngOnDestroy(): void {
     this._onDestroy.next();
@@ -101,6 +105,8 @@ export class MemberListComponent implements OnInit, OnDestroy {
                  await this.publicationService.removeAuteurFromPublication(Number(id), Number(item1.id));
 
               }
+              this.userToDelete =   await this.loginService.getUserByEmail(this.memberToDelete.email);
+              await this.loginService.removeUserById(this.userToDelete.id);
               this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
             }
           }else {

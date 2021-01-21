@@ -76,7 +76,10 @@ export class MemberService {
   getStudentsbyEncadrant(enseignant: any): Promise<Member[]> {
     console.log(enseignant);
     // @ts-ignore
-    return this.httpClient.post<Member[]>(`http://localhost:9999/membre-service/students/enseignant`, enseignant).toPromise();
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.post<Member[]>(`http://localhost:9999/membre-service/students/enseignant`, enseignant, {headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })}).toPromise();
 
   }
   updateEtudiant(id: string, etudiant: Member): Promise<Member>{
