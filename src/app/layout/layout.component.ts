@@ -13,6 +13,7 @@ export class LayoutComponent implements OnInit {
 
   backbutton: EventEmitter<any> = new EventEmitter<any>();
   userexist: any;
+  userRole: any;
   username: string;
   photo: string;
   memberid: any;
@@ -35,6 +36,7 @@ export class LayoutComponent implements OnInit {
   loadMember(): void{
     this.userexist = localStorage.getItem('user');
     this.memberid = localStorage.getItem('membreId');
+    this.userRole = localStorage.getItem('role');
     if (this.userexist){
       this.memberService.getMemberByEmail(this.userexist).then(data => {
         console.log(this.userexist);

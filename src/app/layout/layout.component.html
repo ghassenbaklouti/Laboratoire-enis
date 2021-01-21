@@ -33,7 +33,9 @@
           <div fxLayout="row" fxLayoutAlign="center center">
             <img *ngIf="photo" class="avatar mr-0 mr-sm-16" [src]="photo">
             <mat-icon *ngIf="!photo">account_circle</mat-icon>
-            <span class="username mx-12" fxHide fxShow.gt-sm >{{username}}</span>
+            <span class="username mx-12" fxHide fxShow.gt-sm *ngIf="userRole == 'ROLE_ADMIN'">ADMINISTRATOR</span>
+
+            <span class="username mx-12" fxHide fxShow.gt-sm *ngIf="userRole == 'ROLE_USER'">{{username}}</span>
             <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
           </div>
         </button>
@@ -47,7 +49,7 @@
 
         <mat-menu #userMenu="matMenu" [overlapTrigger]="false" >
 
-          <button class="" mat-menu-item [routerLink]="'/members/' + memberid + '/detail'">
+          <button  *ngIf="userRole == 'ROLE_USER'" class="" mat-menu-item [routerLink]="'/members/' + memberid + '/detail'">
             <mat-icon>account_box</mat-icon>
             <span>Profile</span>
           </button>
