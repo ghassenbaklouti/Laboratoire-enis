@@ -41,6 +41,8 @@ export class MemberFormEncadrantComponent implements OnInit {
         this.imageSrc = this.item.photo;
         this.initForm(item);
         console.log(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
@@ -94,18 +96,24 @@ export class MemberFormEncadrantComponent implements OnInit {
 
 
     if (!!this.currentItemId) {
-      this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members']));
+      // tslint:disable-next-line:max-line-length
+      this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+        console.log(error);
+      });
     }else {
       this.loginservice.register(this.userSignup);
       console.log(this.userSignup);
-      this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members']));
+      this.memberService.createEnseignant(this.enseignantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+        console.log(error);
+      });
     }
   }
 
+  // tslint:disable-next-line:typedef
   onFileChange(event) {
     const reader = new FileReader();
 
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [image] = event.target.files;
       reader.readAsDataURL(image);
 

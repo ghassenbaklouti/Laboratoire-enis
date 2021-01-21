@@ -44,7 +44,9 @@ export class ToolListComponent implements OnInit, OnDestroy  {
     this.toolService.getAllTools().then(data => {this.dataSource = data;
                                                  this.dataSource2 = new MatTableDataSource(data);
                                                  this.dataSource2.paginator = this.paginator;
-                                                 this.dataSource2.sort = this.sort; });
+                                                 this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onRemoveTool(id: any): void {
@@ -58,8 +60,12 @@ export class ToolListComponent implements OnInit, OnDestroy  {
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       // console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
-        this.toolService.removeToolParticipants(id).then();
-        this.toolService.removeToolById(id).then(() => this.fetchDataSource());
+        this.toolService.removeToolParticipants(id).then().catch((error) => {
+          console.log(error);
+        });
+        this.toolService.removeToolById(id).then(() => this.fetchDataSource()).catch((error) => {
+          console.log(error);
+        });
       }
     });
   }

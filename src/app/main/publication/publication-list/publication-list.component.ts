@@ -41,7 +41,9 @@ export class PublicationListComponent implements OnInit, OnDestroy {
     this.publicationService.getAllPublications().then(data => {this.dataSource = data;
                                                                this.dataSource2 = new MatTableDataSource(data);
                                                                this.dataSource2.paginator = this.paginator;
-                                                               this.dataSource2.sort = this.sort; });
+                                                               this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onRemovePublication(id: any): void {
@@ -55,8 +57,12 @@ export class PublicationListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       // console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
-        this.publicationService.removePublicationParticipants(id).then();
-        this.publicationService.removePublicationById(id).then(() => this.fetchDataSource());
+        this.publicationService.removePublicationParticipants(id).then().catch((error) => {
+          console.log(error);
+        });
+        this.publicationService.removePublicationById(id).then(() => this.fetchDataSource()).catch((error) => {
+          console.log(error);
+        });
       }
     });
   }

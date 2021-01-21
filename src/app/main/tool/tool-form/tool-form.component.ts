@@ -26,6 +26,8 @@ export class ToolFormComponent implements OnInit {
       this.toolService.getToolById(this.currentItemId).then(item => {
         this.item = item;
         this.initForm(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
@@ -48,9 +50,13 @@ export class ToolFormComponent implements OnInit {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     const objectToSubmit: Evenement = {...this.item, ...this.form.value};
     if (!!this.currentItemId) {
-      this.toolService.updateTool(objectToSubmit).then(() => this.router.navigate(['./tools']));
+      this.toolService.updateTool(objectToSubmit).then(() => this.router.navigate(['./tools'])).catch((error) => {
+        console.log(error);
+      });
     }else {
-      this.toolService.createTool(objectToSubmit).then(() => this.router.navigate(['./tools']));
+      this.toolService.createTool(objectToSubmit).then(() => this.router.navigate(['./tools'])).catch((error) => {
+        console.log(error);
+      });
     }
 
   }

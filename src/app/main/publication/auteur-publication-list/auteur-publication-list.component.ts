@@ -7,9 +7,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
 import {takeUntil} from 'rxjs/operators';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
-import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-auteur-publication-list',
@@ -56,7 +56,9 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
     this.publicationService.getPublicationMembers(this.currentItemId).then(data => {this.dataSource = data;
                                                                                     this.dataSource2 = new MatTableDataSource(data);
                                                                                     this.dataSource2.paginator = this.paginator;
-                                                                                    this.dataSource2.sort = this.sort; });
+                                                                                    this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
 
     // tslint:disable-next-line:typedef
@@ -74,8 +76,12 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
         console.log(this.auteur.id);
         console.log(this.activatedRoute.snapshot.params.id);
         this.publicationService.addAuteurToPublication(Number(this.auteur.id), this.activatedRoute.snapshot.params.id).then(() =>
-          this.fetchDataSource());
-        this.initForm(null); });
+          this.fetchDataSource()).catch((error) => {
+          console.log(error);
+        });
+        this.initForm(null); }).catch((error) => {
+        console.log(error);
+      });
 
     }
 
@@ -91,7 +97,9 @@ export class AuteurPublicationListComponent implements OnInit, OnDestroy {
         console.log('removing: ', isDeleteConfirmed);
         if (isDeleteConfirmed) {
           // tslint:disable-next-line:max-line-length
-          this.publicationService.removeAuteurFromPublication(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource());
+          this.publicationService.removeAuteurFromPublication(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource()).catch((error) => {
+            console.log(error);
+          });
         }
       });
     }

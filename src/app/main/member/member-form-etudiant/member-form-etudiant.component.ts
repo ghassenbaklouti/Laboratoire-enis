@@ -44,15 +44,21 @@ export class MemberFormEtudiantComponent implements OnInit {
         this.selectedDiploma = item.diplome;
         this.memberService.getAllTeachers().then(data => {this.encadrants = data;
           // tslint:disable-next-line:max-line-length
-                                                          this.selectedEncadrant = data.find(encadrant => this.item.encadrant.id === encadrant.id); });
+                                                          this.selectedEncadrant = data.find(encadrant => this.item.encadrant.id === encadrant.id); }).catch((error) => {
+          console.log(error);
+        });
         this.item = item;
         this.imageSrc = this.item.photo;
         this.initForm(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
     }
-    this.memberService.getAllTeachers().then(data => this.encadrants = data);
+    this.memberService.getAllTeachers().then(data => this.encadrants = data).catch((error) => {
+      console.log(error);
+    });
   }
   // tslint:disable-next-line:typedef
   initForm(item: Member) {
@@ -116,12 +122,17 @@ export class MemberFormEtudiantComponent implements OnInit {
     this.userSignup.role = ['user'];
 
     if (!!this.currentItemId) {
-      this.memberService.updateEtudiant(this.currentItemId, this.etudiantToSave).then(() => this.router.navigate(['./members']));
+      // tslint:disable-next-line:max-line-length
+      this.memberService.updateEtudiant(this.currentItemId, this.etudiantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+        console.log(error);
+      });
     }else {
       console.log(this.etudiantToSave);
       this.loginservice.register(this.userSignup);
       console.log(this.userSignup);
-      this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members']));
+      this.memberService.createEtudiant(this.etudiantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+        console.log(error);
+      });
     }
   }
   // tslint:disable-next-line:typedef

@@ -29,6 +29,8 @@ export class MemberFormComponent implements OnInit {
       this.memberService.getMemberById(this.currentItemId).then(item => {
         this.item = item;
         this.initForm(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
@@ -55,7 +57,9 @@ export class MemberFormComponent implements OnInit {
     const objectToSubmit: Member = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
 
-    this.memberService.saveMember(objectToSubmit).then(() => this.router.navigate(['./members']));
+    this.memberService.saveMember(objectToSubmit).then(() => this.router.navigate(['./members'])).catch((error) => {
+      console.log(error);
+    });
 
   }
 }

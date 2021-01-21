@@ -46,6 +46,8 @@ export class MemberDetailComponent implements OnInit {
       this.memberService.getFullMemberById(this.currentItemId).then(item => {
         this.item = item;
         console.log(this.item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.item = null;

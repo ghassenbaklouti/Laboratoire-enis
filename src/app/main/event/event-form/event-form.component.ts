@@ -28,6 +28,8 @@ export class EventFormComponent implements OnInit {
         console.log(item.date);
         this.item = item;
         this.initForm(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
@@ -52,10 +54,14 @@ export class EventFormComponent implements OnInit {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     const objectToSubmit: Evenement = {...this.item, ...this.form.value};
     if (!!this.currentItemId) {
-      this.eventService.updateEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
+      this.eventService.updateEvent(objectToSubmit).then(() => this.router.navigate(['./events'])).catch((error) => {
+        console.log(error);
+      });
     }else {
       console.log(objectToSubmit);
-      this.eventService.createEvent(objectToSubmit).then(() => this.router.navigate(['./events']));
+      this.eventService.createEvent(objectToSubmit).then(() => this.router.navigate(['./events'])).catch((error) => {
+        console.log(error);
+      });
     }
 
   }

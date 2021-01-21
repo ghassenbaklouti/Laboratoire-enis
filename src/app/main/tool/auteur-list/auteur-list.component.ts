@@ -65,7 +65,9 @@ export class AuteurListComponent implements OnInit, OnDestroy {
     this.toolService.getToolMembers(this.currentItemId).then(data => {this.dataSource = data;
                                                                       this.dataSource2 = new MatTableDataSource(data);
                                                                       this.dataSource2.paginator = this.paginator;
-                                                                      this.dataSource2.sort = this.sort; });
+                                                                      this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onSubmit(): void {
@@ -74,8 +76,12 @@ export class AuteurListComponent implements OnInit, OnDestroy {
       console.log(this.auteur.id);
       console.log(this.activatedRoute.snapshot.params.id);
       this.toolService.addAuteurToTool(Number(this.auteur.id), this.activatedRoute.snapshot.params.id).then(() =>
-        this.fetchDataSource());
-      this.initForm(null); });
+        this.fetchDataSource()).catch((error) => {
+        console.log(error);
+      });
+      this.initForm(null); }).catch((error) => {
+      console.log(error);
+    });
 
   }
 
@@ -91,11 +97,14 @@ export class AuteurListComponent implements OnInit, OnDestroy {
       console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
         // tslint:disable-next-line:max-line-length
-        this.toolService.removeAuteurFromTool(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource());
+        this.toolService.removeAuteurFromTool(Number(memberid), this.activatedRoute.snapshot.params.id).then(() => this.fetchDataSource()).catch((error) => {
+          console.log(error);
+        });
       }
     });
   }
-  // tslint:disable-next-line:typedef
+
+  // tslint:disable-next-line:typedef use-lifecycle-interface
   ngAfterViewInit() {
     this.dataSource2.paginator = this.paginator;
     this.dataSource2.sort = this.sort;

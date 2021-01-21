@@ -28,6 +28,8 @@ export class PublicationFormComponent implements OnInit {
       this.publicationService.getPublicationById(this.currentItemId).then(item => {
         this.item = item;
         this.initForm(item);
+      }).catch((error) => {
+        console.log(error);
       });
     } else {
       this.initForm(null);
@@ -53,9 +55,13 @@ export class PublicationFormComponent implements OnInit {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
     const objectToSubmit: Publication = {...this.item, ...this.form.value};
     if (!!this.currentItemId) {
-      this.publicationService.updatePublication(objectToSubmit).then(() => this.router.navigate(['./articles']));
+      this.publicationService.updatePublication(objectToSubmit).then(() => this.router.navigate(['./articles'])).catch((error) => {
+        console.log(error);
+      });
     }else {
-      this.publicationService.createPublication(objectToSubmit).then(() => this.router.navigate(['./articles']));
+      this.publicationService.createPublication(objectToSubmit).then(() => this.router.navigate(['./articles'])).catch((error) => {
+        console.log(error);
+      });
     }
     console.log(objectToSubmit);
 

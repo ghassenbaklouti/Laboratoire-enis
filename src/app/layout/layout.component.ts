@@ -43,6 +43,8 @@ export class LayoutComponent implements OnInit {
         this.photo = data?.photo;
         this.memberid = data?.id;
         console.log(this.username);
+      }).catch((error) => {
+        console.log(error);
       });
     }
   }

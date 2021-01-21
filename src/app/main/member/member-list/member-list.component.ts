@@ -12,8 +12,8 @@ import {PublicationService} from '../../../../services/publication.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {LoginService} from "../../../../services/login.service";
-import {User} from "../../../../models/user";
+import {LoginService} from '../../../../services/login.service';
+import {User} from '../../../../models/user';
 
 @Component({
   selector: 'app-member-list',
@@ -60,7 +60,9 @@ export class MemberListComponent implements OnInit, OnDestroy {
     this.memberService.getAllMembers().then(data => {this.dataSource = data;
                                                      this.dataSource2 = new MatTableDataSource(data);
                                                      this.dataSource2.paginator = this.paginator;
-                                                     this.dataSource2.sort = this.sort; });
+                                                     this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
   redirectToEdit(element: any): void {
     console.log(element.id);
@@ -109,11 +111,15 @@ export class MemberListComponent implements OnInit, OnDestroy {
               }
               this.userToDelete =   await this.loginService.getUserByEmail(this.memberToDelete.email);
               await this.loginService.removeUserById(this.userToDelete.id);
-              this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+              this.memberService.removeMemberById(id).then(() => this.fetchDataSource()).catch((error) => {
+                console.log(error);
+              });
             }
           }else {
             console.log('cannot delete teacher !');
           }
+        }).catch((error) => {
+          console.log(error);
         });
       }
     });

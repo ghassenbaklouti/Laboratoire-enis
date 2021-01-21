@@ -43,7 +43,9 @@ export class EventListComponent implements OnInit, OnDestroy {
     this.eventService.getAllEvents().then(data => {this.dataSource = data;
                                                    this.dataSource2 = new MatTableDataSource(data);
                                                    this.dataSource2.paginator = this.paginator;
-                                                   this.dataSource2.sort = this.sort; });
+                                                   this.dataSource2.sort = this.sort; }).catch((error) => {
+      console.log(error);
+    });
   }
 
   onRemoveEvent(id: any): void {
@@ -57,8 +59,12 @@ export class EventListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       // console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
-        this.eventService.removeEventParticipants(id).then();
-        this.eventService.removeEventById(id).then(() => this.fetchDataSource());
+        this.eventService.removeEventParticipants(id).then().catch((error) => {
+          console.log(error);
+        });
+        this.eventService.removeEventById(id).then(() => this.fetchDataSource()).catch((error) => {
+          console.log(error);
+        });
       }
     });
   }

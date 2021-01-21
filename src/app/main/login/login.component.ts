@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
     this.loginservice.login(this.item).then(res => {
       this.membreservice.getMemberByEmail(res.email).then(data => {
         localStorage.setItem('membreId', data.id);
+      }).catch((error) => {
+        console.log(error);
       });
       console.log(res);
       localStorage.setItem('user', res.email);
@@ -47,6 +49,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', res.accessToken);
       localStorage.setItem('userid', res.id);
       this.loginservice.send.emit();
+    }).catch((error) => {
+      console.log(error);
     });
     this.router.navigate(['./dashboard']);
   }
