@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
     this.item.username = this.form.value.email;
     this.loginservice.login(this.item).then(res => {
-      this.membreservice.getMemberByEmail(res.email).then(data =>{
+      this.membreservice.getMemberByEmail(res.email).then(data => {
         localStorage.setItem('membreId', data.id);
       });
       console.log(res);

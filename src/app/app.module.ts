@@ -24,8 +24,13 @@ import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
 import { AuteurPublicationListComponent } from './main/publication/auteur-publication-list/auteur-publication-list.component';
 import { LoginComponent } from './main/login/login.component';
-
-
+import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,12 +51,19 @@ import { LoginComponent } from './main/login/login.component';
     MemberFormEncadrantComponent,
     AuteurPublicationListComponent,
     LoginComponent,
+    NewDashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

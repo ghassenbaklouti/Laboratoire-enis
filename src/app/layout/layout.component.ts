@@ -35,13 +35,13 @@ export class LayoutComponent implements OnInit {
   }
   loadMember(): void{
     this.userexist = localStorage.getItem('user');
-    this.memberid = localStorage.getItem('membreId');
     this.userRole = localStorage.getItem('role');
     if (this.userexist){
       this.memberService.getMemberByEmail(this.userexist).then(data => {
         console.log(this.userexist);
         this.username = data?.nom + ' ' + data?.prenom;
         this.photo = data?.photo;
+        this.memberid = data?.id;
         console.log(this.username);
       });
     }

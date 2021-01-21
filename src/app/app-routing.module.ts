@@ -16,6 +16,7 @@ import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 import {AuteurPublicationListComponent} from './main/publication/auteur-publication-list/auteur-publication-list.component';
 import {LoginComponent} from './main/login/login.component';
+import {NewDashboardComponent} from './new-dashboard/new-dashboard.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     pathMatch: 'full',
-    component: DashboardComponent,
+    component: NewDashboardComponent,
   },
   {
     path: 'members',
