@@ -24,6 +24,10 @@ export class MemberService {
     return this.httpClient.get<Enseignant[]>('http://localhost:9999/membre-service/enseignants').toPromise();
     // return new Promise(resolve => resolve(this.placeholderMembers));
   }
+  getAllStudents(): Promise<Etudiant[]> {
+    return this.httpClient.get<Etudiant[]>('http://localhost:9999/membre-service/etudiants').toPromise();
+    // return new Promise(resolve => resolve(this.placeholderMembers));
+  }
 
   getMemberById(id: string): Promise<Member> {
     return this.httpClient.get<Member>(`http://localhost:9999/membre-service/membre/${id}`).toPromise();

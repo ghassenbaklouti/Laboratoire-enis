@@ -24,7 +24,6 @@ import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/
 import { MemberFormEncadrantComponent } from './main/member/member-form-encadrant/member-form-encadrant.component';
 import { AuteurPublicationListComponent } from './main/publication/auteur-publication-list/auteur-publication-list.component';
 import { LoginComponent } from './main/login/login.component';
-import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -51,7 +50,6 @@ import { LayoutModule } from '@angular/cdk/layout';
     MemberFormEncadrantComponent,
     AuteurPublicationListComponent,
     LoginComponent,
-    NewDashboardComponent,
   ],
   imports: [
     BrowserModule,

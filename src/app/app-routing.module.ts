@@ -16,7 +16,7 @@ import { MemberFormEtudiantComponent } from './main/member/member-form-etudiant/
 import { MemberDetailComponent } from './main/member/member-detail/member-detail.component';
 import {AuteurPublicationListComponent} from './main/publication/auteur-publication-list/auteur-publication-list.component';
 import {LoginComponent} from './main/login/login.component';
-import {NewDashboardComponent} from './new-dashboard/new-dashboard.component';
+import {AuthGuardServiceGuard} from './guard/auth-guard-service.guard';
 
 
 const routes: Routes = [
@@ -33,7 +33,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     pathMatch: 'full',
-    component: NewDashboardComponent,
+    component: DashboardComponent,
   },
   {
     path: 'members',
@@ -47,21 +47,25 @@ const routes: Routes = [
         path: 'createEncadrant',
         pathMatch: 'full',
         component: MemberFormEncadrantComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: 'createEtudiant',
         pathMatch: 'full',
         component: MemberFormEtudiantComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: 'editEncadrant/:id',
         pathMatch: 'full',
         component: MemberFormEncadrantComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: 'editEtudiant/:id',
         pathMatch: 'full',
         component: MemberFormEtudiantComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: ':id/detail',
@@ -86,11 +90,15 @@ const routes: Routes = [
         path: 'create',
         pathMatch: 'full',
         component: ToolFormComponent,
+
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: ':id/edit',
         pathMatch: 'full',
         component: ToolFormComponent,
+
+        canActivate: [AuthGuardServiceGuard],
       }, {
         path: ':id/auteurs',
         pathMatch: 'full',
@@ -119,11 +127,13 @@ const routes: Routes = [
         path: 'create',
         pathMatch: 'full',
         component: PublicationFormComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: ':id/edit',
         pathMatch: 'full',
         component: PublicationFormComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: '**',
@@ -143,11 +153,13 @@ const routes: Routes = [
         path: 'create',
         pathMatch: 'full',
         component: EventFormComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: ':id/edit',
         pathMatch: 'full',
         component: EventFormComponent,
+        canActivate: [AuthGuardServiceGuard],
       },
       {
         path: ':id/participants',
