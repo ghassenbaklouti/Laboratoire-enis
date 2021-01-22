@@ -10,6 +10,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatMenuModule,
     MatExpansionModule,
     ConfirmDialogModule,
+    MatDialogModule,
     MatSortModule
   ],
   exports: [
@@ -34,6 +36,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCardModule,
     MatGridListModule,
     ConfirmDialogModule,
+    MatDialogModule,
     MatExpansionModule,
     MatMenuModule,
     MatSortModule

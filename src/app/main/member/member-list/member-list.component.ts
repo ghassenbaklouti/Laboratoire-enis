@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MemberService} from '../../../../services/member.service';
 import {Member} from '../../../../models/memeber.model';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../../../../@root/components/confirm-dialog/confirm-dialog.component';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -114,7 +114,7 @@ export class MemberListComponent implements OnInit, OnDestroy {
               });
             }
           }else {
-            console.log('cannot delete teacher !');
+            this.dialog.open(DialogElementsExampleDialog);
           }
         }).catch((error) => {
           console.log(error);
@@ -139,3 +139,11 @@ export class MemberListComponent implements OnInit, OnDestroy {
     }
   }
 }
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+// tslint:disable-next-line:component-class-suffix
+export class DialogElementsExampleDialog {}
