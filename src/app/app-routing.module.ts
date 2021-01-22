@@ -17,6 +17,7 @@ import { MemberDetailComponent } from './main/member/member-detail/member-detail
 import {AuteurPublicationListComponent} from './main/publication/auteur-publication-list/auteur-publication-list.component';
 import {LoginComponent} from './main/login/login.component';
 import {AuthGuardServiceGuard} from './guard/auth-guard-service.guard';
+import {AuthroleguardGuard} from './guard/authroleguard.guard';
 
 
 const routes: Routes = [
@@ -47,13 +48,13 @@ const routes: Routes = [
         path: 'createEncadrant',
         pathMatch: 'full',
         component: MemberFormEncadrantComponent,
-        canActivate: [AuthGuardServiceGuard],
+        canActivate: [AuthGuardServiceGuard, AuthroleguardGuard],
       },
       {
         path: 'createEtudiant',
         pathMatch: 'full',
         component: MemberFormEtudiantComponent,
-        canActivate: [AuthGuardServiceGuard],
+        canActivate: [AuthGuardServiceGuard, AuthroleguardGuard],
       },
       {
         path: 'editEncadrant/:id',
