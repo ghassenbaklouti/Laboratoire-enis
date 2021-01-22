@@ -123,7 +123,9 @@ export class MemberFormEtudiantComponent implements OnInit {
 
     if (!!this.currentItemId) {
       // tslint:disable-next-line:max-line-length
-      this.memberService.updateEtudiant(this.currentItemId, this.etudiantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+      this.memberService.updateEtudiant(this.currentItemId, this.etudiantToSave).then(() => {this.router.navigate(['./members']);
+        // tslint:disable-next-line:max-line-length
+                                                                                             this.loginservice.send.emit(); }).catch((error) => {
         console.log(error);
       });
     }else {

@@ -30,7 +30,7 @@ export class LayoutComponent implements OnInit {
   logout(): void{
     this.loginservice.logout();
     this.userexist = null;
-    this.router.navigate(['./login']);
+    this.router.navigate(['./dashboard']);
 
   }
   loadMember(): void{

@@ -16,6 +16,7 @@ import {Tool} from '../../../../models/tool.model';
 export class MemberDetailComponent implements OnInit {
   panelOpenState = false;
   currentItemId: string;
+  membreId: any;
   item: Member = {
     id: null,
     cin: null,
@@ -42,6 +43,7 @@ export class MemberDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentItemId = this.activatedRoute.snapshot.params.id;
+    this.membreId = localStorage.getItem('membreId');
     if (!!this.currentItemId) {
       this.memberService.getFullMemberById(this.currentItemId).then(item => {
         this.item = item;
@@ -51,6 +53,16 @@ export class MemberDetailComponent implements OnInit {
       });
     } else {
       this.item = null;
+    }
+
+  }
+  redirectToEdit(element: any): void {
+    console.log(element.id);
+    if (element.grade != null){
+      this.router.navigate([`./members/editEncadrant/${Number(element.id)}`]);
+    }
+    if (element.diplome != null){
+      this.router.navigate([`./members/editEtudiant/${Number(element.id)}`]);
     }
 
   }

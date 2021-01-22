@@ -184,5 +184,7 @@
   </mat-card-content>
   <mat-card-actions fxLayoutAlign="end center" style="margin: 3%">
     <button mat-raised-button color="warn" onclick="history.back()">Back</button>
+    &nbsp;
+    <button mat-raised-button color="primary" (click)="redirectToEdit(item)" *ngIf="membreId == currentItemId">Edit</button>
   </mat-card-actions>
 </mat-card>

@@ -67,12 +67,10 @@ export class MemberListComponent implements OnInit, OnDestroy {
   redirectToEdit(element: any): void {
     console.log(element.id);
     if (element.grade != null){
-      console.log('Encadrant');
       console.log(element.id);
       this.router.navigate([`./members/editEncadrant/${Number(element.id)}`]);
     }
     if (element.diplome != null){
-      console.log('Etudiant');
       this.router.navigate([`./members/editEtudiant/${Number(element.id)}`]);
     }
 

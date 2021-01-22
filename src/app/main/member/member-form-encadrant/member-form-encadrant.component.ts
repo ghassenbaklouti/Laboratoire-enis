@@ -97,7 +97,9 @@ export class MemberFormEncadrantComponent implements OnInit {
 
     if (!!this.currentItemId) {
       // tslint:disable-next-line:max-line-length
-      this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => this.router.navigate(['./members'])).catch((error) => {
+      this.memberService.updateTeacher(this.currentItemId, this.enseignantToSave).then(() => {this.router.navigate(['./members']);
+        // tslint:disable-next-line:max-line-length
+                                                                                              this.loginservice.send.emit(); }).catch((error) => {
         console.log(error);
       });
     }else {
