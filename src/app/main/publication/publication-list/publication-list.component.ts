@@ -26,6 +26,7 @@ export class PublicationListComponent implements OnInit, OnDestroy {
   dataSource: Publication[] = [];
   dataSource2: MatTableDataSource<Publication>;
   userexist: any;
+  userRole: any;
   constructor(private publicationService: PublicationService,
               private dialog: MatDialog) { }
   ngOnDestroy(): void {
@@ -36,6 +37,7 @@ export class PublicationListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
   }
   private fetchDataSource(): void {
     this.publicationService.getAllPublications().then(data => {this.dataSource = data;

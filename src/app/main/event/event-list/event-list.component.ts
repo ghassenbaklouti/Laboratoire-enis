@@ -26,6 +26,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'title', 'lieu', 'date', 'actions'];
   dataSource: Evenement[] = [];
   userexist: any;
+  userRole: any;
   dataSource2: MatTableDataSource<Evenement>;
   constructor(private eventService: EventService,
               private dialog: MatDialog) { }
@@ -37,6 +38,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
   }
 
   private fetchDataSource(): void {

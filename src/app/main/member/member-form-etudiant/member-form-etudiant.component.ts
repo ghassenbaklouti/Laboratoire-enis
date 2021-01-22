@@ -72,7 +72,7 @@ export class MemberFormEtudiantComponent implements OnInit {
       nom: new FormControl(item?.nom, [Validators.required]),
       prenom: new FormControl(item?.prenom, [Validators.required]),
       date: new FormControl(item?.date, [Validators.required]),
-      email: new FormControl(item?.email, [Validators.required]),
+      email: new FormControl({value: item?.email, disabled: this.verifyEditOrCreate()}, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
       diplome: new FormControl(item?.diplome, [Validators.required]),
       dateInscription: new FormControl(item?.dateInscription, [Validators.required]),
@@ -153,6 +153,15 @@ export class MemberFormEtudiantComponent implements OnInit {
 
       };
 
+    }
+  }
+
+  // tslint:disable-next-line:typedef
+  verifyEditOrCreate(){
+    if (!! this.activatedRoute.snapshot.params.id){
+      return true;
+    }else{
+      return false;
     }
   }
 

@@ -60,7 +60,7 @@ export class MemberFormEncadrantComponent implements OnInit {
       nom: new FormControl(item?.nom, [Validators.required]),
       prenom: new FormControl(item?.prenom, [Validators.required]),
       date: new FormControl(item?.date, [Validators.required]),
-      email: new FormControl(item?.email, [Validators.required]),
+      email: new FormControl({value: item?.email, disabled: this.verifyEditOrCreate()}, [Validators.required]),
       grade: new FormControl(item?.grade, [Validators.required]),
       etablissement: new FormControl(item?.etablissement, [Validators.required]),
       cv: new FormControl(item?.cv, [Validators.required]),
@@ -127,6 +127,15 @@ export class MemberFormEncadrantComponent implements OnInit {
 
       };
 
+    }
+  }
+
+  // tslint:disable-next-line:typedef
+  verifyEditOrCreate(){
+    if (!! this.activatedRoute.snapshot.params.id){
+      return true;
+    }else{
+      return false;
     }
   }
 

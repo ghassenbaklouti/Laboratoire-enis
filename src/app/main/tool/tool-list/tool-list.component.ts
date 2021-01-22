@@ -26,6 +26,7 @@ export class ToolListComponent implements OnInit, OnDestroy  {
   displayedColumns: string[] = ['id', 'CreatedDate', 'Source', 'actions'];
   dataSource: Tool[] = [];
   userexist: any;
+  userRole: any;
   dataSource2: MatTableDataSource<Tool>;
   constructor(private toolService: ToolService,
               private dialog: MatDialog) { }
@@ -38,6 +39,7 @@ export class ToolListComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
     this.fetchDataSource();
     this.userexist = localStorage.getItem('user');
+    this.userRole = localStorage.getItem('role');
   }
 
   private fetchDataSource(): void {
