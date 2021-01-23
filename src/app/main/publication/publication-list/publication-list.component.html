@@ -35,7 +35,10 @@
 
   <ng-container matColumnDef="lien">
     <th mat-header-cell class="px-12" *matHeaderCellDef>Lien</th>
-    <td mat-cell class="px-12" *matCellDef="let element"> {{element.lien}} </td>
+    <td mat-cell class="px-12" *matCellDef="let element">
+      <a [href]="element.lien" target="_blank">
+        <mat-icon>link</mat-icon>
+      </a></td>
   </ng-container>
 
   <!-- Symbol Column -->

@@ -54,7 +54,10 @@ export class ToolFormComponent implements OnInit {
         console.log(error);
       });
     }else {
-      this.toolService.createTool(objectToSubmit).then(() => this.router.navigate(['./tools'])).catch((error) => {
+      this.toolService.createTool(objectToSubmit).then(data => {this.router.navigate(['./tools']);
+        if (localStorage.getItem('role') === 'ROLE_USER'){
+          this.toolService.addAuteurToTool( Number(localStorage.getItem('membreId')), Number(data.id) );
+        }}).catch((error) => {
         console.log(error);
       });
     }

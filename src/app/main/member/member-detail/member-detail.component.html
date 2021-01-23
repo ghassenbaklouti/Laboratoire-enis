@@ -78,6 +78,40 @@
         </td>
       </tr>
     </table>
+    <hr style="margin-right: 15%;margin-left: 15%;" *ngIf="item.grade">
+    <mat-accordion style="margin-right: 15%;margin-left: 15%;" *ngIf="item.grade">
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false"
+                           style="margin-right: 15%;margin-left: 15%;">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="theme-1">
+            My Students({{students.length}})
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table style="width: 100%" cellspacing="0">
+          <tr *ngFor="let student of students">
+            <td>
+              <mat-label class="example-full-width-left">
+                CIN:&nbsp;
+              </mat-label>
+              {{student.cin}}
+            </td>
+            <td>
+              <mat-label class="example-full-width-left">
+                Name:&nbsp;
+              </mat-label>
+              {{student.nom}} {{student.prenom}}
+            </td>
+            <td>
+              <mat-label class="example-full-width-right">
+                Diplome:&nbsp;
+              </mat-label>
+              {{student.diplome}}
+            </td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
     <hr style="margin-right: 15%;margin-left: 15%;">
     <mat-accordion style="margin-right: 15%;margin-left: 15%;">
       <mat-expansion-panel (opened)="panelOpenState = true"
@@ -85,11 +119,8 @@
                            style="margin-right: 15%;margin-left: 15%;">
         <mat-expansion-panel-header>
           <mat-panel-title class="theme-1">
-            Events
+            Events({{item.events.length}})
           </mat-panel-title>
-          <mat-panel-description>
-            There are {{item.events.length}} Events
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <table style="width: 100%" cellspacing="0">
           <tr *ngFor="let event of item.events">
@@ -111,6 +142,10 @@
             </mat-label>
             {{event.lieu}}
           </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="toEditEvent(event.id)" *ngIf="membreId == currentItemId">
+                <mat-icon>edit</mat-icon></button>
+            </td>
         </tr>
         </table>
       </mat-expansion-panel>
@@ -121,11 +156,8 @@
                            style="margin-right: 15%;margin-left: 15%;">
         <mat-expansion-panel-header>
           <mat-panel-title class="theme-1">
-            Articles
+            Articles({{item.pubs.length}})
           </mat-panel-title>
-          <mat-panel-description>
-            There are {{item.pubs.length}} Articles
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <table style="width: 100%" cellspacing="0">
           <tr *ngFor="let publication of item.pubs">
@@ -147,6 +179,10 @@
               </mat-label>
               {{publication.lien}}
             </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="toEditPub(publication.id)" *ngIf="membreId == currentItemId">
+                <mat-icon>edit</mat-icon></button>
+            </td>
           </tr>
         </table>
       </mat-expansion-panel>
@@ -157,11 +193,8 @@
                            style="margin-right: 15%;margin-left: 15%;">
         <mat-expansion-panel-header>
           <mat-panel-title class="theme-1">
-            Tools
+            Tools({{item.outils.length}})
           </mat-panel-title>
-          <mat-panel-description>
-            There are {{item.outils.length}} Tools
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <table style="width: 100%" cellspacing="0">
           <tr *ngFor="let tool of item.outils">
@@ -176,6 +209,10 @@
                 Date:&nbsp;
               </mat-label>
               {{tool.date| date :'d MMMM y'}}
+            </td>
+            <td>
+              <button mat-icon-button color="primary" (click)="toEditTool(tool.id)" *ngIf="membreId == currentItemId">
+                <mat-icon>edit</mat-icon></button>
             </td>
           </tr>
         </table>

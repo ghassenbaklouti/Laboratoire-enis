@@ -17,6 +17,7 @@ export class MemberDetailComponent implements OnInit {
   panelOpenState = false;
   currentItemId: string;
   membreId: any;
+  students: Member[];
   item: Member = {
     id: null,
     cin: null,
@@ -47,6 +48,9 @@ export class MemberDetailComponent implements OnInit {
     if (!!this.currentItemId) {
       this.memberService.getFullMemberById(this.currentItemId).then(item => {
         this.item = item;
+        this.memberService.getStudentsbyEncadrant(item).then(data => this.students = data).catch((error) => {
+          console.log(error);
+        });
         console.log(this.item);
       }).catch((error) => {
         console.log(error);
@@ -66,5 +70,15 @@ export class MemberDetailComponent implements OnInit {
     }
 
   }
+  toEditEvent(id: any): void {
+    this.router.navigate([`./events/${Number(id)}/edit/`]);
+  }
+  toEditTool(id: any): void {
+    this.router.navigate([`./tools/${Number(id)}/edit/`]);
+  }
+  toEditPub(id: any): void {
+    this.router.navigate([`./articles/${Number(id)}/edit/`]);
+  }
+
 
 }

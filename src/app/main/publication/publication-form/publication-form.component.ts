@@ -59,7 +59,10 @@ export class PublicationFormComponent implements OnInit {
         console.log(error);
       });
     }else {
-      this.publicationService.createPublication(objectToSubmit).then(() => this.router.navigate(['./articles'])).catch((error) => {
+      this.publicationService.createPublication(objectToSubmit).then(data => {this.router.navigate(['./articles']);
+        if (localStorage.getItem('role') === 'ROLE_USER'){
+          this.publicationService.addAuteurToPublication( Number(localStorage.getItem('membreId')), Number(data.id) );
+        }}).catch((error) => {
         console.log(error);
       });
     }
